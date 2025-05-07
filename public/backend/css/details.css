@@ -1,0 +1,362 @@
+.view1{
+	text-align: right;
+	font-size: 20px;
+	margin-top: -10px;
+	text-transform: uppercase;
+}
+.view1 a{
+	color: #000;
+}
+
+.form-layout-footer{
+	text-align: right;
+}
+
+.back{
+	font-size: 20px;
+	color: #000;
+}
+.dot{
+	font-size: 20px;
+}
+.text-black{
+	color: #000;
+	font-size: 15px;
+}
+.ml-auto{
+	text-align: right;
+}
+
+@media screen and (max-width: 678px) {
+  .dot {
+    display: none;
+  }
+
+  .text-black{
+  	position: absolute;
+  	left: 15px;
+  	top: -7px ;
+  }
+
+.admi-form{
+	display: none;
+}
+
+.text-white{
+  	display: none;
+}
+.phone{
+	margin-top: 15px;
+}
+
+
+}
+
+h6{
+  color: black;
+}
+.text-black{
+color: black;
+font-weight: bold;
+}
+      
+@media screen and (max-width: 480px) {
+.text-black{
+  display: none;
+}
+
+.name::before{
+  content: "ছাত্র/ছাত্রীর নাম";
+  padding-right: 92px;
+}
+
+.fname::before{
+  content: "পিতার নাম";
+  padding-right: 125px;
+}
+
+.mname::before{
+  content: "মাতার নাম";
+  padding-right: 125px;
+}
+
+.phone::before{
+  content: "ফোন";
+  padding-right: 162px;
+}
+
+.vill::before{
+  content: "গ্রাম";
+  padding-right: 172px;
+}
+.post::before{
+  content: "ডাকঘর";
+  padding-right: 150px;
+}
+.upa::before{
+  content: "উপজেলা";
+  padding-right: 140px;
+}
+.dis::before{
+  content: "জেলা";
+  padding-right: 164px;
+}
+.birth_d::before{
+  content: "জন্ম তারিখ";
+  padding-right: 128px;
+}
+.bid::before{
+  content: "জন্ম নিবন্ধন নম্বর";
+  padding-right: 86px;
+}
+.focc::before{
+  content: "পিতার পেশা";
+  padding-right: 122px;
+}
+
+.nid::before{
+  content: "এন আইডি নম্বর";
+  padding-right: 96px;
+}
+.mocc::before{
+  content: "মাতার পেশা";
+  padding-right: 122px;
+}
+.admi_class::before{
+  content: "ভর্তি ইচ্ছুক শ্রেনী";
+  padding-right: 92px;
+}
+.admi_date::before{
+  content: "ভর্তি তারিখ";
+  padding-right: 130px;
+}
+.admi_roll::before{
+  content: "ভর্তি রোল";
+  padding-right: 140px;
+}
+.uniqid::before{
+  content: "ইউনিক আইডি";
+  padding-right: 105px;
+}
+
+.last_ins::before{
+  content: "সর্বশেষ শিক্ষা প্রতিষ্ঠানের নাম";
+  padding-right: 10px;
+}
+
+.img{
+  position: absolute;
+  left: 300px;
+  top: 20px;
+}
+
+.card{
+  position: relative;
+  top: -70px;
+  overflow: auto;
+}
+
+}
+
+
+/* ====== */
+.top{
+  margin-top: -20px;
+}
+.last_ins{
+  width: 500px;
+}
+.nid{
+  width: 500px;
+}
+.bid{
+  width: 500px;
+}
+
+/* phone */
+.card{
+  width: 100%;
+  height: auto;
+  padding: 20px 10px;
+}
+
+.col-form-label{
+  font-size: 16px;
+  color: #111;
+}
+
+ .add-phone{
+    margin-top: 10px;
+  }
+
+.all-class a{
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  border: 2px solid crimson;
+  border-radius: 10%;
+  margin: 3px;
+}
+
+.all-class a:hover{
+  background: crimson;
+  color: #fff;
+  border: 2px solid black;
+}
+
+@media screen and (max-width: 678px){
+  
+   .card1{
+    padding-top: 20px;
+    margin-top: 65px !important;
+  }
+
+ .card2{
+  margin-top: -1px !important;
+ }
+
+
+ .card3{
+  margin-top: 20px !important;
+ }
+
+
+  .form-group .col-sm-4{
+    padding: 5px 15px 15px 15px;
+  }
+
+  .form-group .col-sm-10{
+    padding: 5px 15px 15px 15px;
+  }
+
+  .add-phone{
+    margin-left: -40px;
+    margin-top: 10px;
+  }
+}
+
+.btn{
+  border-radius: 5px;
+}
+
+.form{
+  margin: 0px 150px;
+
+}
+
+ .form input{
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+
+  .form-layout-footer{
+    padding-right: 55px;
+  }
+
+  .form-layout-footer button{
+    border-radius: 5px;
+  }
+
+@media screen and (max-width: 678px){
+  .form{
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+  .form input{
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+   .form-layout-footer{
+    padding: 0;
+  }
+
+  .form-layout-footer button{
+    border-radius: 5px;
+  }
+
+ 
+}
+
+ .all-class a{
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  border: 2px solid crimson;
+  border-radius: 10%;
+  margin: 3px;
+  
+}
+
+.btn{
+  border-radius: 5px;
+}
+
+.form{
+  margin: 0px 150px;
+
+}
+
+ .form input{
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+
+  .form-layout-footer{
+    padding-right: 55px;
+  }
+
+  .form-layout-footer button{
+    border-radius: 5px;
+  }
+
+@media screen and (max-width: 678px){
+  .form{
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+  .form input{
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+   .form-layout-footer{
+    padding: 0;
+  }
+
+  .form-layout-footer button{
+    border-radius: 5px;
+  }
+
+ .all-class{
+  padding-left: 500px;
+ }
+
+ .row11{
+  margin-top: -60px;
+ }
+
+ .card11{
+  margin-top: -1px !important;
+}
+
+.all-cash1{
+  margin-left: -40px;
+}
+
+}
+
+
+@media print {
+
+#btn-print{
+  display: none;
+}
+
+}
