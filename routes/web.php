@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ColorController;
@@ -20,7 +22,7 @@ use App\Models\User;
 
 
 
-
+// Auth::routes(['verify' => true]);
 
 // Route::get('/front/dashboard', function () {
 //     return view('front.dashboard');
