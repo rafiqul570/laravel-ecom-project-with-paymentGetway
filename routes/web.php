@@ -22,9 +22,14 @@ use App\Models\User;
 
 
 
-Route::get('/front/dashboard', function () {
-    return view('front.dashboard');
-})->middleware(['auth', 'verified'])->name('front.dashboard');
+// Route::get('/front/dashboard', function () {
+//     return view('front.dashboard');
+// })->middleware(['auth', 'verified'])->name('front.dashboard');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified']);
+
 
 
 Route::middleware('auth')->group(function () {
@@ -41,7 +46,7 @@ Route::controller(HomeController::class)->group(function(){
 
 
 //HomeController with middleware
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::controller(HomeController::class)->group(function(){
         Route::get('/redirects', 'roleControll')->name('redirects');
 
