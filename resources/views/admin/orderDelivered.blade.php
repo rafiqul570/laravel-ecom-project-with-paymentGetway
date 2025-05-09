@@ -48,7 +48,7 @@
                  <td>
                   @if($data->delivery_status=='processing')
                     
-                    <a onclick="return confirm('Are you sure ?')" href="{{route('front.order.delivered', $data->id)}}"><span class="btn btn-info"> Delivered</span></a>
+                    <a onclick="return confirm('Are you sure ?')" href="{{route('order.delivered', $data->id)}}"><span class="btn btn-info"> Delivered</span></a>
                   
                   @else
 

@@ -30,11 +30,11 @@ class ClaintController extends Controller
     }
 
 
-    public function SingleProduct($id){
+    public function products($id){
 
         $product = Product::FindOrFail($id);
         $related_product = Product::where('category_id', $product->category_id)->take(6)->get();
-        return view('front.pages.singleProduct', compact('product', 'related_product'));
+        return view('products', compact('product', 'related_product'));
 
     }
 
@@ -57,18 +57,6 @@ class ClaintController extends Controller
 
 
      
-    public function pendingOrders(){
-
-        $pendingOrders = Order::where('user_id', auth()->id())->get();
-        
-        $shippingCost = Order::where('user_id', auth()->id())->value('shippingCost');
-        
-        $total = $pendingOrders->sum(fn($item) => $item->product_price * $item->product_quantity);
-
-        $grand_total = $total + $shippingCost;
-
-        return view('front.pages.pendingOrders', compact( 'pendingOrders', 'shippingCost', 'total', 'grand_total'));
-    }
 
    
     public function history(){

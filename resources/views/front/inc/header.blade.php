@@ -127,7 +127,7 @@
                             {{ Auth::user()->name }}
                             <div class="header-menu">
                                 <ul>
-                                    <li><a href="{{route('front.pages.pendingOrders')}}">Dashboard</a></li>
+                                    <li><a href="{{route('pendingOrders')}}">Dashboard</a></li>
                                     <li style="margin-left: 15px;">
                                      <form method="POST" action="{{ route('logout') }}">
                                       @csrf
@@ -180,7 +180,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                         <li><a href="{{route('front.cart.index')}}"><i class="fa fa-shopping-cart"></i> <span id="cart-count" class="cart-count">0</span></a></li>
+                         <li><a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i> <span id="cart-count" class="cart-count">0</span></a></li>
                         </ul>
                         <div class="header__cart__price"></div>
                     </div>

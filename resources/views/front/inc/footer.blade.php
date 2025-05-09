@@ -78,7 +78,7 @@
 <script>
     function updateCartCount() {
         $.ajax({
-            url: "{{ route('front.cart.count') }}",
+            url: "{{ route('cart.count') }}",
             type: 'GET',
             success: function(data) {
                 $('#cart-count').text(data.count);

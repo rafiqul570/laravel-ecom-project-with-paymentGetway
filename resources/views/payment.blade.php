@@ -5,8 +5,8 @@
 <div class="container">
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{route('front.checkout.create')}}">Checkout</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Shipping & Billing</li>
+    <li class="breadcrumb-item"><a href="{{route('shipping')}}">Shipping</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Payment</li>
 </ol>
 </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
@@ -20,7 +20,7 @@
 			 <span style="font-size: 18px; color: #000; font-weight: 500;" class="mb-2">Select Payment Method</span>
 			 <div style="display: inline-flex; column-gap: 30px;">
 			 	
-			 	<form action="{{route('front.order.store')}}" method="POST"> 
+			 	<form onclick="return confirm('Order Confirm?')" action="{{route('order.store')}}" method="POST"> 
 				 @csrf
 			 	<button type="submit" style="font-size: 24px;" class="btn btn-outline-primary-2 btn-order btn-block">Cash on delivery</button>
 			 	

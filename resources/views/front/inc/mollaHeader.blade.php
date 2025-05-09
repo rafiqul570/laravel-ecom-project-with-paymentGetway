@@ -125,7 +125,7 @@
                 {{ Auth::user()->name }}
                 <div class="header-menu">
                     <ul>
-                        <li><a href="{{route('front.pages.pendingOrders')}}">Dashboard</a></li>
+                        <li><a href="{{route('pendingOrders')}}">Dashboard</a></li>
                         <li style="margin-left: 15px;">
                          <form method="POST" action="{{ route('logout') }}">
                           @csrf
@@ -198,7 +198,7 @@
                 
                 <!-- Cartcount -->
                 <div style="color: #c96;">
-                    <a href="{{route('front.cart.index')}}">
+                    <a href="{{route('cart')}}">
                         <i class="icon-shopping-cart" style="font-size: 30px; color: #c96;"></i>
                         <span id="cart-count" class="cart-count">0</span>
 

@@ -90,10 +90,10 @@
       </a>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('front.pages.pendingOrders')}}"><i class="fas fa-home me-2"></i>Dashboard</a>
+          <a class="nav-link" href="{{route('pendingOrders')}}"><i class="fas fa-home me-2"></i>Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{route('front.pages.pendingOrders')}}"><i class="fas fa-box me-2"></i>Pending Orders</a>
+          <a class="nav-link" href="{{route('pendingOrders')}}"><i class="fas fa-box me-2"></i>Pending Orders</a>
         </li>
 
           <li class="nav-item">

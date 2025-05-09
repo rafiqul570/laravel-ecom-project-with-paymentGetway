@@ -5,7 +5,7 @@
 <div class="container">
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{route('front.cart.index')}}">Add-To-Cart</a></li>
+    <li class="breadcrumb-item"><a href="{{route('cart')}}">Add-To-Cart</a></li>
     <li class="breadcrumb-item active" aria-current="page">Billing</li>
 </ol>
 </div><!-- End .container -->
@@ -81,7 +81,7 @@
     						<tr class="summary-total">
     							
     							<td>Subtotal:</td>
-    							<td>&#2547 {{ number_format($subtotal, 2) }}</td>
+    							<td>&#2547 {{ number_format($total, 2) }}</td>
     						</tr><!-- End .summary-subtotal -->
     						<tr>
     							<td>Shipping:</td>
@@ -89,7 +89,7 @@
     						</tr>
     						<tr class="summary-total">
     							<td>Total:</td>
-    							<td><strong>&#2547 {{ number_format($total, 2) }}</strong></td>
+    							<td><strong>&#2547 {{ number_format($grand_total, 2) }}</strong></td>
     						</tr><!-- End .summary-total -->
     						
     					</tbody>

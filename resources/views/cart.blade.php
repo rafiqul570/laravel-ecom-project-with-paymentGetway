@@ -58,7 +58,7 @@
                     <td class="item-total-{{ $item->id }}">&#2547 {{ number_format($item->product_price * $item->product_quantity, 2) }}</td>
 				
 				<td class="remove-col">
-				 <a onclick="return confirm('Are you sure ?')" href="{{route('front.cart.delete', $item->id)}}"><span class="tx-danger"><i class="icon-close"></i></span></a>
+				 <a onclick="return confirm('Are you sure ?')" href="{{route('cart.delete', $item->id)}}"><span class="tx-danger"><i class="icon-close"></i></span></a>
 				</td>
 				
 				</tr>

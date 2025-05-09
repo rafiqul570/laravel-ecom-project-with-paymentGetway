@@ -11,7 +11,7 @@
                      @foreach ($allProduct as $data)
                     <div id="slaider" class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-1.jpg">
-                            <h5><a href="{{route('front.pages.singleProduct', [$data->id, $data->slug])}}"><img class="mig1" src="{{asset('/uploads/image/'.$data->product_img)}}"></a></h5>
+                            <h5><a href="{{route('products', [$data->id, $data->slug])}}"><img class="mig1" src="{{asset('/uploads/image/'.$data->product_img)}}"></a></h5>
                         </div>
                     </div>
                    @endforeach

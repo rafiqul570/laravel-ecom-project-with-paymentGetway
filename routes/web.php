@@ -1,20 +1,21 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\ColorController;
+use App\Http\Controllers\product\SizeController;
+use App\Http\Controllers\Product\ShippingcostController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Order\CartController;
+use App\Http\Controllers\Order\BillingController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Order\ShippingController;
+use App\Http\Controllers\Order\PaymentController;
+use App\Http\Controllers\ClaintController;
+use App\Http\Controllers\BkashController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ColorController;
-use App\Http\Controllers\SizeController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\ClaintController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ShippingcostController;
-use App\Http\Controllers\BkashController;
-use Illuminate\Support\Facades\Route;
+
 use App\Models\User;
 
 
@@ -53,7 +54,7 @@ Route::middleware('auth')->group(function () {
 //ClaintController without middleware
 Route::controller(ClaintController::class)->group(function(){
     Route::get('/front/pages/categoryPage/{id}/{slug}', 'CategoryPage')->name('front.pages.categoryPage');
-    Route::get('/front/pages/singleProduct/{id}/{slug}', 'SingleProduct')->name('front.pages.singleProduct');
+    Route::get('/products/{id}/{slug}', 'products')->name('products');
     Route::get('/front/pages/newReleasePage/', 'NewReleasePage')->name('front.pages.newReleasePage');
     
 });
@@ -64,8 +65,6 @@ Route::middleware('auth')->group(function () {
 Route::controller(ClaintController::class)->group(function(){
     Route::get('/front/pages/todaysDeal', 'TodaysDeal')->name('front.pages.todaysDeal');
     Route::get('/front/pages/customService', 'CustomService')->name('front.pages.customService');
-    Route::get('/front/pages/payment', 'payment')->name('front.pages.payment');
-    Route::get('/front/pages/pendingOrders', 'pendingOrders')->name('front.pages.pendingOrders');
     Route::get('/front/pages/history', 'history')->name('front.pages.history');
     
    });
@@ -76,23 +75,45 @@ Route::controller(ClaintController::class)->group(function(){
 //CartController
 Route::middleware('auth')->group(function () {
 Route::controller(CartController::class)->group(function(){
-    Route::get('/front/cart/index', 'index')->name('front.cart.index');
-    Route::post('/front/cart/store', 'store')->name('front.cart.store');
-    Route::post('/front/cart/update', 'updateQuantity')->name('front.cart.update');
-    Route::get('/front/cart/delete/{id}', 'delete')->name('front.cart.delete');
-    Route::get('/front/cart/count', 'getCartCount')->name('front.cart.count');
+    Route::get('/cart', 'index')->name('cart');
+    Route::post('/cart/store', 'store')->name('cart.store');
+    Route::post('/cart/update', 'updateQuantity')->name('cart.update');
+    Route::get('/cart/delete/{id}', 'delete')->name('cart.delete');
+    Route::get('/cart/count', 'getCartCount')->name('cart.count');
     
    });
 
 });
 
-//CheckoutController
+//BillingController
 Route::middleware('auth')->group(function () {
-Route::controller(CheckoutController::class)->group(function(){
-    Route::get('/front/checkout/index', 'index')->name('front.checkout.index');
-    Route::get('/front/checkout/create', 'create')->name('front.checkout.create');
-    Route::post('/front/checkout/store', 'store')->name('front.checkout.store');
+Route::controller(BillingController::class)->group(function(){
+    Route::get('/billing', 'shippingAddress')->name('billing');
+    Route::get('/billing/create', 'create')->name('billing.create');
+    Route::post('/billing/store', 'store')->name('billing.store');
     
+    
+   });
+
+});
+
+
+//ShippingController
+Route::middleware('auth')->group(function () {
+Route::controller(ShippingController::class)->group(function(){
+    Route::get('/shipping', 'shippingInfo')->name('shipping');
+    
+   });
+
+});
+
+
+
+//PaymentController
+Route::middleware('auth')->group(function () {
+Route::controller(PaymentController::class)->group(function(){
+    Route::get('/payment', 'paymentMethod')->name('payment');
+   
     
    });
 
@@ -102,16 +123,20 @@ Route::controller(CheckoutController::class)->group(function(){
 //OrderController
 Route::middleware('auth')->group(function () {
 Route::controller(OrderController::class)->group(function(){
-    Route::get('/admin/order/index', 'index')->name('admin.order.index');
-    Route::post('/front/order/store', 'store')->name('front.order.store');
-    Route::get('/front/order/delivered/{id}', 'delivered')->name('front.order.delivered');
+    Route::get('/admin/orderDelivered', 'orderDelivered')->name('admin.orderDelivered');
     Route::get('/admin/pdf/invoice/{id}', 'print_pdf')->name('admin.pdf.invoice');
+
+    // Route::get('/order', 'index')->name('order');
+    Route::post('/order/store', 'store')->name('order.store');
+    Route::get('/order/delivered/{id}', 'delivered')->name('order.delivered');
+    Route::get('/pendingOrders', 'pendingOrders')->name('pendingOrders');
+    
+    
+    
     
    });
 
 });
-
-
 
 
 //Bkashcontroller-2

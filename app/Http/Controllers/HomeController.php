@@ -16,7 +16,7 @@ class HomeController extends Controller
         if($role == '1'){
             return view('admin.dashboard');
         }else{
-            return view('homePage');
+            return view('home');
         }
 
 

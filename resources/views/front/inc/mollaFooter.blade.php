@@ -102,7 +102,7 @@
         let qty = $(this).val();
 
         $.ajax({
-            url: "{{ route('front.cart.update') }}",
+            url: "{{ route('cart.update') }}",
             type: "POST",
             data: {
                 _token: '{{ csrf_token() }}',
@@ -149,7 +149,7 @@
 <script>
     function updateCartCount() {
         $.ajax({
-            url: "{{ route('front.cart.count') }}",
+            url: "{{ route('cart.count') }}",
             type: 'GET',
             success: function(data) {
                 $('#cart-count').text(data.count);
@@ -171,7 +171,7 @@
 <script>
     function updateCartCount() {
         $.ajax({
-            url: "{{ route('front.cart.count') }}",
+            url: "{{ route('cart.count') }}",
             type: 'GET',
             success: function(data) {
                 $('#cart-count2').text(data.count);

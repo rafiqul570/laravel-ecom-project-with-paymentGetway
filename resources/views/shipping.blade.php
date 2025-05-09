@@ -5,7 +5,7 @@
 <div class="container">
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{route('front.checkout.create')}}">Billing</a></li>
+    <li class="breadcrumb-item"><a href="{{route('billing.create')}}">Shipping</a></li>
     <li class="breadcrumb-item active" aria-current="page">Shipping & Billing</li>
 </ol>
 </div><!-- End .container -->

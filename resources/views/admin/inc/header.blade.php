@@ -70,7 +70,7 @@
         if($role == '1'){
         ?>
 
-         <a href="{{route('homePage')}}" target="_blank" class="sl-menu-link">
+         <a href="{{route('home')}}" target="_blank" class="sl-menu-link">
           <div class="sl-menu-item">
             <span class="menu-item-label">Visite Site</span>
           </div><!-- menu-item -->
@@ -132,16 +132,12 @@
           <li class="nav-item"><a href="{{route('admin.product.index')}}" class="nav-link">All Product</a></li>
         </ul>
 
-        <a href="{{route('admin.order.index')}}" class="sl-menu-link">
+        <a href="{{route('admin.orderDelivered')}}" class="sl-menu-link">
           <div class="sl-menu-item">
             <span class="menu-item-label">Order</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-
-       <?php }else{ ?>
-         
-      <h1>Data Not Found</h1>
       
       <?php } ?>
 
