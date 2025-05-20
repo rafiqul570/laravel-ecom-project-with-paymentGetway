@@ -37,6 +37,11 @@
 					</div><!-- End .col-sm-6 -->
 
 					<div class="col-sm-12">
+						<label>Phone number *</label>
+						<input type="tel" class="form-control" name="phone" required>
+					</div>
+
+					<div class="col-sm-12">
 						<label>Address *</label>
 						<input type="text" class="form-control" name="address" required>
 					</div><!-- End .col-sm-6 -->
@@ -51,10 +56,7 @@
 						<input type="text" class="form-control" name="postcode" required>
 					</div><!-- End .col-sm-6 -->
 
-					<div class="col-sm-12">
-						<label>Phone number *</label>
-						<input type="tel" class="form-control" name="phone" required>
-					</div>
+					
     		</div><!-- End .col-lg-8 -->
     		</div>
     		<aside class="col-lg-4">

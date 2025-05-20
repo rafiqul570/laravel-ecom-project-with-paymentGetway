@@ -16,29 +16,26 @@
          	<h1 class="text-dark pb-4">All Orders</h1>
            <table id="datatable1" class="table table-striped table-info">
              <thead>
-               <tr>
-                 <th class="wd-15p">Name</th>
-                 <th class="wd-10p">City</th>
-                 <th class="wd-5p">Postcode</th>
-                 <th class="wd-10p">Phone</th>
+               <tr> 
+                 <th class="wd-10p">Name</th>
+                 <th class="wd-10p">Email</th>
                  <th class="wd-5p">Product Quantity</th>
                  <th class="wd-5p">Ptice</th>
-                 <th class="wd-10p">Payment Status</th>
-                 <th class="wd-10p">Delivery Status</th>
+                 <th class="wd-5p">Payment Status</th>
+                 <th class="wd-5p">Delivery Status</th>
                  <th class="wd-10p">Product Name</th>
                  <th class="wd-10p">Image</th>
                  <th class="wd-10p">Delivered</th>
                  <th class="wd-10p">Print PDF</th>
+                 <th class="wd-10p">Send Email</th>
                </tr>
              </thead>
              @foreach($order as $data)
              <tbody>
                <tr>
                	<td>{{Auth::user()->name}}</td>
-               	<td>{{$data->city}}</td>
-               	<td>{{$data->postcode}}</td>
-               	<td>{{$data->phone}}</td>
-               	<td>{{$data->product_quantity}}</td>
+               	<td>{{$data->email}}</td>
+                <td>{{$data->product_quantity}}</td>
                	<td>{{$data->product_price}}</td>
                	<td>{{$data->payment_status}}</td>
                	<td>{{$data->delivery_status}}</td>
@@ -59,6 +56,11 @@
                  <td>
                   <a href="{{route('admin.pdf.invoice', $data->id)}}" class="btn btn-info">PDF</a>
                 </td>
+
+                <td>
+                  <a href="{{route('admin.send_email', $data->id)}}" class="btn btn-info">Send Email</a>
+                </td>
+
                </tr>
              </tbody>
              @endforeach

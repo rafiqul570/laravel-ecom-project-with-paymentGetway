@@ -96,10 +96,6 @@
           <a class="nav-link" href="{{route('pendingOrders')}}"><i class="fas fa-box me-2"></i>Pending Orders</a>
         </li>
 
-          <li class="nav-item">
-          <a class="nav-link" href="{{route('front.pages.history')}}"><i class="fas fa-box me-2"></i>History</a>
-        </li>
-
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i>Settings</a>
         </li>

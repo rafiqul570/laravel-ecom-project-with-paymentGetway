@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Product;
+use DB;
 
 
 
@@ -64,6 +66,7 @@ class CategoryController extends Controller
         Category::FindOrFail($id)->delete();
         return back()->with('success', 'Success! data delete Successfully');
     }
+
 
 
 }

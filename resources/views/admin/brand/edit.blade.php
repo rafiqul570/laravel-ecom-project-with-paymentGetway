@@ -14,10 +14,10 @@
   <div class="col-md-12">
    <div class="card pd-20 pd-sm-40 form-layout form-layout-5 text-light bg-info">
    <div class="d-flex justify-content-between">
-          <h3 class="text-dark pb-3">Edit Subcategory</h3>
-          <h5><a  href="{{route('ecom_subcategory.index')}}" class="btn btn-light text-dark">All Category</a></h5>
+          <h3 class="text-dark pb-3">Edit Brand</h3>
+          <h5><a  href="{{route('ecom_subcategory.index')}}" class="btn btn-light text-dark">All brand</a></h5>
           </div>
-       <form action="{{route('ecom_subcategory.update') }}" method="POST">
+       <form action="" method="POST">
           @csrf
 
           <input type="hidden" value="{{$editSubcategory->id}}" name="id">

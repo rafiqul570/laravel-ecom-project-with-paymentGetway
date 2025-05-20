@@ -43,6 +43,10 @@
 						<tr>
 							<td><span class="text-info">Phone number - </span>{{$address->phone}}</td>
 						</tr>
+
+						<tr>
+							<td><span class="text-info">Email Address - </span>{{$address->email}}</td>
+						</tr>
 					</tbody>
 					@endforeach
 				</table>

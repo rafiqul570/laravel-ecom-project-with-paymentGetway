@@ -11,13 +11,15 @@ use App\Models\Cart;
 use App\Models\Billing;
 use App\Models\Order;
 use PDF;
+use Notification;
+use App\Notifications\SendEmailNotification;
 
 class OrderController extends Controller
 {
-    public function orderDelivered(){
+    public function order(){
 
         $order = Order::all();
-        return view('admin.orderDelivered', compact('order'));
+        return view('admin.order', compact('order'));
      }
 
 
@@ -39,6 +41,7 @@ class OrderController extends Controller
     public function store(Request $request){
 
          $shippingAddress = Billing::where('user_id', auth()->id())->first();
+         
          $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
 
         foreach($cartItems as $item){
@@ -46,6 +49,7 @@ class OrderController extends Controller
             'user_id' => Auth::id(),
             'city' => $shippingAddress->city,
             'postcode' => $shippingAddress->postcode,
+            'email' => $shippingAddress->email,
             'phone' => $shippingAddress->phone,
 
             'product_id' => $item->product_id,
@@ -68,7 +72,7 @@ class OrderController extends Controller
       }
         
 
-    return redirect()->route('pendingOrders')->with('success', 'Success! data insert Successfully');
+    return redirect()->route('product.shop')->with('success', 'Success! data insert Successfully');
 
     }
 
@@ -84,7 +88,6 @@ class OrderController extends Controller
 
     
     // Download PDF
-    
     public function print_pdf($id){
 
         $order= Order::FindOrFail($id);
@@ -95,6 +98,34 @@ class OrderController extends Controller
     }
 
 
+    //Send Email
+    public function send_email($id){
+        $order = Order::FindOrFail($id);
+        return view('admin.send_email', compact('order'));
+
+    }
+
+    //#end_user_email
+    public function send_user_email(Request $request, $id){
+
+        $order = Order::FindOrFail($id);
+
+        $details = [
+
+            'greeting'=> $request->greeting,
+            'firstline'=> $request->firstline,
+            'body'=> $request->body,
+            'button'=> $request->button,
+            'url'=> $request->url,
+            'lastline'=> $request->lastline,
+
+        ];
+
+        Notification::send($order,new SendEmailNotification($details));
+        return redirect()->back();
+
+
+    }
 
 
 

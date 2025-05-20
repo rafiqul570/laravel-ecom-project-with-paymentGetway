@@ -1,1 +1,0 @@
-email-notification.blade.php

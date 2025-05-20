@@ -20,7 +20,7 @@
 			 <span style="font-size: 18px; color: #000; font-weight: 500;" class="mb-2">Select Payment Method</span>
 			 <div style="display: inline-flex; column-gap: 30px;">
 			 	
-			 	<form onclick="return confirm('Order Confirm?')" action="{{route('order.store')}}" method="POST"> 
+			 	<form onclick="return confirm('Are You Sure?')" action="{{route('order.store')}}" method="POST"> 
 				 @csrf
 			 	<button type="submit" style="font-size: 24px;" class="btn btn-outline-primary-2 btn-order btn-block">Cash on delivery</button>
 			 	

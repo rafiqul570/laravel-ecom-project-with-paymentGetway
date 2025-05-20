@@ -1,6 +1,3 @@
-@php      
-  $allProduct = App\Models\Product::latest()->get();     
-@endphp
 
 @include('front.inc.mollaHeader')
 <main class="main">
@@ -58,29 +55,33 @@
 
                         @else
                         
+
+                        <!-- Display selected color name -->
                         <div class="mb-1">
-                          <div class="color-radio d-flex flex-wrap gap-2">
-                            <span class="product-price" style="font-size: 16px; margin-right:10px;">Color</span>
-                            <input type="radio" id="color" name="product_color" value="{{$product->color_name}}" checked>
-                            <label for="color">{{$product->color_name}}</label>
-                            <!-- <span>{{ ucfirst($product->color_name) }}</span> -->
-                          </div>
+                            <div class="color-radio d-flex flex-wrap gap-2">
+                                <span class="product-price" style="font-size: 16px; margin-right:10px;">Color:</span>
+                                <input type="radio" id="color-radio" name="product_color" value="{{$product->color_name}}" checked hidden>
+                                <label id="color-label" for="color-radio">{{$product->color_name}}</label>
+                            </div>
                         </div>
 
-
-                        <!-- Colors -->
+                        <!-- Related Product Colors -->
                         <div class="mb-3">
-                          <div class="color-radio d-flex flex-wrap gap-2" style="margin-left: 50px;">
-                            @foreach($related_product as $data)
-                            <a href="{{route('products', [$data->id, $data->slug])}}">
-                                <img src="{{asset('/uploads/image/'.$data->product_img)}}" width="40" />
-                            </a>
-                            @endforeach
-                        </div>
+                            <div class="color-radio d-flex flex-wrap gap-2" style="margin-left: 50px;">
+                                @foreach($related_product as $data)
+                                <a href="{{route('products', [$data->id, $data->slug])}}" 
+                                   class="color-hover-img" 
+                                   data-color="{{$data->color_name}}" 
+                                   onmouseenter="selectColor('{{$data->color_name}}')"
+                                   onclick="event.preventDefault(); window.location.href=this.href;">
+                                    <img src="{{asset('/uploads/image/'.$data->product_img)}}" width="40" />
+                                </a>
+                                @endforeach
+                            </div>
                         </div>
                         
 
-                        <div class="details-filter-row details-row-size">
+                        <div class="details-filter-row details-row-size mb-3">
                           <label for="size">Select Size:</label>
                            <div class="d-flex flex-wrap">
                             <input type="radio" name="product_size" id="size-s" class="size-option" value="S">
@@ -100,11 +101,17 @@
                         @endif
 
                          </div><!-- End .details-filter-row -->
+                         @if($product->product_quantity)
+                         <label class="product-price btn-sm mb-3">Avelable Quantity: {{$product->product_quantity}}</label>
+                         @else
+                         <label class="product-price btn-sm mb-3">Out of stock</label>
+                         @endif
+
 
                         <div class="details-filter-row details-row-size">
                             <label for="qty">Qty:</label>
                             <div class="product-details-quantity">
-                                <input type="number" name="product_quantity" id="quantity" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                <input type="number" name="product_quantity" id="quantity" class="form-control" value="1" min="1" max="{{$product->product_quantity}}" step="1" data-decimals="0" required>
                             </div><!-- End .product-details-quantity -->
                         </div><!-- End .details-filter-row -->
 

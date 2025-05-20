@@ -161,19 +161,9 @@
                 <div class="col-lg-6">
                      <nav class="header__menu">
                         <ul id="nav">
-                            <li><a href="">Shop</a></li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="">Contact</a></li>
-                            
-                            <li><span id="pages">Pages</span>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
+                            <li>
+                                <a href="{{route('product.shop')}}">Shop</a>
                             </li>
-                            
                         </ul>
                     </nav>
                 </div>

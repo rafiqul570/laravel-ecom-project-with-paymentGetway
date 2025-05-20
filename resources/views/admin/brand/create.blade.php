@@ -14,41 +14,30 @@
      <div class="col-md-12">
        <div class="card pd-20 pd-sm-40 form-layout form-layout-5 text-light bg-info">
        <div class="d-flex justify-content-between">
-          <h3 class="text-dark pb-3">Add New Sub Category</h3>
-          <h5><a  href="{{route('ecom_subcategory.index')}}" class="btn btn-light text-dark">All Subcategory</a></h5>
+          <h3 class="text-dark pb-3">Add New Brand</h3>
+          <h5><a  href="{{route('admin.brand.index')}}" class="btn btn-light text-dark">All Brand</a></h5>
           </div>
-          <form action="{{route('ecom_subcategory.store')}}" method="POST">
+          <form action="{{route('admin.brand.store')}}" method="POST">
             @csrf
-            <div class="row">
-            <label class="col-sm-2 form-control-label"><span class="tx-danger">*</span> Subcategory name:</label>
-              <div class="col-sm-10 mg-t-10 mg-sm-t-0">
-                <input type="text" name="subcategory_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-              </div>
+            <div class="row mg-b-25">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-group">Brand name</label>
+                <input type="text" name="brand_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
               <h6 class="col-sm-12 d-flex justify-content-center">
-              <x-input-error :messages="$errors->get('subcategory_name')" class="mt-2 " />
+              <x-input-error :messages="$errors->get('brand_name')" class="mt-2 " />
               </h6>
+             </div>
             </div>
+          </div>
 
-            <div class="row row-xs">
-                <label class="col-sm-2 form-control-label"><span class="tx-danger">*</span> Name:</label>
-                <div class="col-sm-10 mg-t-10 mg-sm-t-0">
-                    <select class="form-control select2" name="category_id" data-placeholder="Choose one"
-                    data-parsley-class-handler="#slWrapper"
-                    data-parsley-errors-container="#slErrorContainer" required>
-                    <option selected>Choose Category</option>
-                    @foreach ($allCategory as $data)
-                    <option value="{{$data->id}}">{{$data->category_name}}</option>
-                    @endforeach
-                    </select>
-                </div>
-            </div><!-- row -->
 
-            <div class="row row-xs mg-t-30">
-                <div class="col-sm-12 d-flex justify-content-end">
-                  <div class="form-layout-footer">
-                    <button class="btn btn-light mg-r-5">Add Subcategory</button>
-                  </div><!-- form-layout-footer -->
-                </div><!-- col-8 -->
+          <div class="row row-xs mg-t-30">
+              <div class="col-sm-12">
+                <div class="form-layout-footer">
+                  <button class="btn btn-light mg-r-5">Add Brand</button>
+                </div><!-- form-layout-footer -->
+              </div><!-- col-8 -->
               </div>
            </form>
           </div><!-- card -->

@@ -78,6 +78,17 @@
 
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
+            <span class="menu-item-label">Brand</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div>
+        </a>
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{route('admin.brand.create')}}" class="nav-link">Add Brand</a></li>
+          <li class="nav-item"><a href="{{route('admin.brand.index')}}" class="nav-link">All Brand</a></li>
+        </ul>
+
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
             <span class="menu-item-label">Category</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div>
@@ -86,6 +97,18 @@
           <li class="nav-item"><a href="{{route('admin.category.create')}}" class="nav-link">Add Category</a></li>
           <li class="nav-item"><a href="{{route('admin.category.index')}}" class="nav-link">All Category</a></li>
         </ul>
+
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <span class="menu-item-label">Subcategory</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div>
+        </a>
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{route('admin.subCategory.create')}}" class="nav-link">Add Sub-Category</a></li>
+          <li class="nav-item"><a href="{{route('admin.subCategory.index')}}" class="nav-link">All SubCategory</a></li>
+        </ul>
+
 
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -98,7 +121,7 @@
           <li class="nav-item"><a href="{{route('admin.color.index')}}" class="nav-link">All Color</a></li>
         </ul>
 
-        <!-- <a href="#" class="sl-menu-link">
+       <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <span class="menu-item-label">Size</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
@@ -107,7 +130,7 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{route('admin.size.create')}}" class="nav-link">Add Size</a></li>
           <li class="nav-item"><a href="{{route('admin.size.index')}}" class="nav-link">All size</a></li>
-        </ul> -->
+        </ul>
 
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -132,7 +155,7 @@
           <li class="nav-item"><a href="{{route('admin.product.index')}}" class="nav-link">All Product</a></li>
         </ul>
 
-        <a href="{{route('admin.orderDelivered')}}" class="sl-menu-link">
+        <a href="{{route('admin.order')}}" class="sl-menu-link">
           <div class="sl-menu-item">
             <span class="menu-item-label">Order</span>
           </div><!-- menu-item -->

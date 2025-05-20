@@ -95,5 +95,6 @@
     // Then update every 10 seconds (adjust interval as needed)
     setInterval(updateCartCount, 1000);
 </script>
+
 </body>
 </html>

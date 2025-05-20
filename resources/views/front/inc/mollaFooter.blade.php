@@ -89,6 +89,8 @@
     <script src="{{asset('frontend/js/jquery.exzoom.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap-input-spinner.js')}}"></script>
     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('assets/js/nouislider.min.js')}}"></script>
+    <script src="{{asset('assets/js/wNumb.js')}}"></script>
     <!-- Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
@@ -199,7 +201,7 @@ $(document).on('click', '.product-link', function(e) {
     var slug = $(this).data('slug');
 
     $.ajax({
-        url: '/front.pages.singleProduct/' + id + '/' + slug, // Your route pattern
+        url: '/products/' + id + '/' + slug, // Your route pattern
         type: 'GET',
         success: function(response) {
             $('#product-details').html(response); // Load the response into the div
@@ -210,6 +212,25 @@ $(document).on('click', '.product-link', function(e) {
     });
 });
 </script>
+
+
+<!-- color and related product -->
+
+<script>
+function selectColor(colorName) {
+    // Set radio button value
+    const radio = document.getElementById('color-radio');
+    radio.value = colorName;
+    radio.checked = true;
+
+    // Update label text
+    const label = document.getElementById('color-label');
+    label.textContent = colorName;
+}
+</script>
+
+
+
   
 </body>
 </html>

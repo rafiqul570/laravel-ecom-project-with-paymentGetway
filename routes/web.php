@@ -4,6 +4,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\SubCategoryController;
+use App\Http\Controllers\Product\BrandController;
 use App\Http\Controllers\Product\ColorController;
 use App\Http\Controllers\product\SizeController;
 use App\Http\Controllers\Product\ShippingcostController;
@@ -21,12 +23,6 @@ use App\Http\Controllers\HomeController;
 use App\Models\User;
 
 
-
-// Auth::routes(['verify' => true]);
-
-// Route::get('/front/dashboard', function () {
-//     return view('front.dashboard');
-// })->middleware(['auth', 'verified'])->name('front.dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -61,22 +57,13 @@ Route::middleware('auth', 'verified')->group(function () {
 //ClaintController without middleware
 Route::controller(ClaintController::class)->group(function(){
     Route::get('/front/pages/categoryPage/{id}/{slug}', 'CategoryPage')->name('front.pages.categoryPage');
-    Route::get('/products/{id}/{slug}', 'products')->name('products');
     Route::get('/front/pages/newReleasePage/', 'NewReleasePage')->name('front.pages.newReleasePage');
-    
+
+
 });
 
 
-//ClaintController with middleware
-Route::middleware('auth')->group(function () {
-Route::controller(ClaintController::class)->group(function(){
-    Route::get('/front/pages/todaysDeal', 'TodaysDeal')->name('front.pages.todaysDeal');
-    Route::get('/front/pages/customService', 'CustomService')->name('front.pages.customService');
-    Route::get('/front/pages/history', 'history')->name('front.pages.history');
-    
-   });
 
-});
 
 
 //CartController
@@ -130,13 +117,16 @@ Route::controller(PaymentController::class)->group(function(){
 //OrderController
 Route::middleware('auth')->group(function () {
 Route::controller(OrderController::class)->group(function(){
-    Route::get('/admin/orderDelivered', 'orderDelivered')->name('admin.orderDelivered');
+    Route::get('/admin/order', 'order')->name('admin.order');
     Route::get('/admin/pdf/invoice/{id}', 'print_pdf')->name('admin.pdf.invoice');
+    Route::get('/admin/send_email/{id}', 'send_email')->name('admin.send_email');
+    Route::post('/admin/send_user_email/{id}', 'send_user_email')->name('admin.send_user_email');
 
-    // Route::get('/order', 'index')->name('order');
+  
     Route::post('/order/store', 'store')->name('order.store');
     Route::get('/order/delivered/{id}', 'delivered')->name('order.delivered');
     Route::get('/pendingOrders', 'pendingOrders')->name('pendingOrders');
+
     
     
     
@@ -188,10 +178,38 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/category/edit/{id}', 'edit')->name('admin.category.edit');
         Route::post('/admin/category/update', 'update')->name('admin.category.update');
         Route::get('/admin/category/delete/{id}', 'delete')->name('admin.category.delete');
-        // Route::get('category/{category_name}',  'redirectCategory')->name('category.redirect');
 
     });
 });
+
+
+// SubCategory
+Route::middleware('auth')->group(function () {
+    Route::controller(SubCategoryController::class)->group(function(){
+        Route::get('/admin/subCategory/index', 'index')->name('admin.subCategory.index');
+        Route::get('/admin/subCategory/create', 'create')->name('admin.subCategory.create');
+        Route::post('/admin/subCategory/store', 'store')->name('admin.subCategory.store');
+        Route::get('/admin/categsubCategoryory/edit/{id}', 'edit')->name('admin.subCategory.edit');
+        Route::post('/admin/subCategory/update', 'update')->name('admin.subCategory.update');
+        Route::get('/admin/subCategory/delete/{id}', 'delete')->name('admin.subCategory.delete');
+
+    });
+});
+
+
+// Brand
+Route::middleware('auth')->group(function () {
+    Route::controller(BrandController::class)->group(function(){
+        Route::get('/admin/brand/index', 'index')->name('admin.brand.index');
+        Route::get('/admin/brand/create', 'create')->name('admin.brand.create');
+        Route::post('/admin/brand/store', 'store')->name('admin.brand.store');
+        Route::get('/admin/brand/edit/{id}', 'edit')->name('admin.brand.edit');
+        Route::post('/admin/brand/update', 'update')->name('admin.brand.update');
+        Route::get('/admin/brand/delete/{id}', 'delete')->name('admin.brand.delete');
+
+    });
+});
+
 
 
 // Color
@@ -251,7 +269,28 @@ Route::middleware('auth')->group(function () {
     });
 });
 
- 
+
+
+// ProductController without middleware
+
+    Route::controller(ProductController::class)->group(function(){
+
+       Route::get('/products/{id}/{slug}', 'RelatedProducts')->name('products');//Related Product
+      
+       Route::get('/product/shop', 'shop')->name('product.shop'); // Initial view
+       
+       Route::get('/filter-products', 'filter')->name('filter-products'); // AJAX endpoint
+
+
+});
+
+
+//category/subcategory/product dropdown
+
+    Route::get('/home', [HomeController::class, 'index']);
+    Route::get('/get-subcategories/{category_id}', [HomeController::class, 'getSubCategories']);
+    Route::get('/get-products/{sub_category_id}', [HomeController::class, 'getProducts']);
+
 
 
 

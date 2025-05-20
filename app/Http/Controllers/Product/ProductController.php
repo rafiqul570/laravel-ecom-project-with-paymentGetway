@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Product;
@@ -23,10 +25,12 @@ class ProductController extends Controller
 
     public function create(){
         $allCategory = Category::latest()->get();
+        $allSubCategory = SubCategory::latest()->get();
+        $allBrand = Brand::latest()->get();
         $allColor = Color::latest()->get();
         $allSize = Size::latest()->get();
         $shippingCost = Shippingcost::latest()->get();
-        return view('admin.product.create',compact('allCategory', 'allColor', 'allSize', 'shippingCost'));
+        return view('admin.product.create',compact('allCategory', 'allColor', 'allSize', 'shippingCost','allSubCategory','allBrand'));
     }
 
 
@@ -36,8 +40,11 @@ class ProductController extends Controller
             'product_name' => 'required',
             'product_price' => 'required',
             'category_id' => 'required',
+            'sub_category_id' => 'required',
+            'brand_id' => 'required',
             'color_id' => 'required',
-            'product_quantity' => 'required',
+            'size_id' => 'required',
+            'product_quantity' => ['required', 'integer', 'min:1'],
             'short_description' => 'required',
             'long_description' => 'required',
             'shippingCost' => 'required',
@@ -54,20 +61,35 @@ class ProductController extends Controller
         }
             
             $category_id = $request->category_id;
-            $color_id = $request->color_id;
-            
             $category_name = Category::where('id', $category_id)->value('category_name');
+
+            $sub_category_id = $request->sub_category_id;
+            $subCategory_name = SubCategory::where('id', $sub_category_id)->value('subCategory_name');
+
+            $brand_id = $request->brand_id;
+            $brand_name = Brand::where('id', $brand_id)->value('brand_name');
+
+            $color_id = $request->color_id;
             $color_name = Color::where('id', $color_id)->value('color_name');
+
+            $size_id = $request->size_id;
+            $size_name = Size::where('id', $size_id)->value('size_name');
            
 
         Product::insert([
             'product_name' => $request->product_name,
             'product_price' => $request->product_price,
+            'product_quantity' => $request->product_quantity,
             'category_id' => $request->category_id,
             'category_name' => $category_name,
+            'sub_category_id' => $request->sub_category_id,
+            'subCategory_name' => $subCategory_name,
+            'brand_id' => $request->brand_id,
+            'brand_name' => $brand_name,
             'color_id' => $request->color_id,
             'color_name' => $color_name,
-            'product_quantity' => $request->product_quantity,
+            'size_id' => $request->size_id,
+            'size_name' => $size_name,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'shippingCost' => $request->shippingCost,
@@ -75,7 +97,7 @@ class ProductController extends Controller
             'slug' => strtolower(str_replace( ' ', '-', $request->product_name)),
         ]);
 
-             Category::where('id', $category_id)->increment('product_count',1);
+             SubCategory::where('id', $sub_category_id)->increment('product_count',1);
 
 
         return back()->with('success', 'Success! data insert Successfully');
@@ -197,6 +219,93 @@ class ProductController extends Controller
         return back()->with('success', 'Success! data delete Successfully');
     }
 
+
+    //Related product
+    public function RelatedProducts($id){
+
+        $product = Product::FindOrFail($id);
+        
+        $related_product = Product::where('sub_category_id', $product->sub_category_id)->take(6)->get();
+        
+        return view('products', compact('product', 'related_product'));
+
+
+    }
+
+
+
+    //shop page filtering system
+
+    public function shop()
+    {
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        $products = Product::all();
+        
+        return view('product.shop', compact('categories', 'subCategories', 'products', 'brands', 'colors', 'sizes'));
+    }
+
+    public function filter(Request $request)
+    {
+        $query = Product::query();
+
+        // if ($request->search) {
+        //     $query->where('slug', 'like', '%' . $request->search . '%');
+        // }
+
+            
+        if ($request->search) {
+           $query->where(function ($q) use ($request) {
+           $q->where('product_name', 'like', '%' . $request->search . '%')
+          ->orWhere('slug', 'like', '%' . $request->search . '%')
+          ->orWhere('product_price', 'like', '%' . $request->search . '%');
+           });
+          
+          }
+
+
+        if ($request->category_name) {
+            $query->whereIn('category_name', $request->category_name);
+        }
+
+        if ($request->subCategory_name) {
+            $query->whereIn('subCategory_name', $request->subCategory_name);
+        }
+
+        if ($request->brand_name) {
+            $query->whereIn('brand_name', $request->brand_name);
+        }
+
+        if ($request->color_name) {
+            $query->whereIn('color_name', $request->color_name);
+        }
+
+        if ($request->size_name) {
+            $query->whereIn('size_name', $request->size_name);
+        }
+
+        if ($request->product_price) {
+            $query->where(function($q) use ($request) {
+                foreach ($request->product_price as $range) {
+                    [$min, $max] = explode('-', $range);
+                    $q->orWhereBetween('product_price', [(int)$min, (int)$max]);
+                }
+            });
+        }
+
+        $products = $query->get();
+
+        return response()->json($products);
+    }
+
+    
+
     
 }
+
+
+
 

@@ -71,6 +71,34 @@
             </div>
           </div><!-- col-12 -->
 
+          <div class="col-lg-12">
+            <div class="form-group mg-b-10-force">
+              <label class="form-control-label">SubCategory</label>
+              <select class="form-control select2" name="sub_category_id" data-placeholder="Choose one"
+              data-parsley-class-handler="#slWrapper"
+              data-parsley-errors-container="#slErrorContainer" required>
+              <option selected="" disabled="">Select SubCategory</option>
+              @foreach ($allSubCategory as $data)
+              <option value="{{$data->id}}">{{$data->subCategory_name}}</option>
+              @endforeach
+              </select>
+            </div>
+          </div><!-- col-12 -->
+
+          <div class="col-lg-12">
+            <div class="form-group mg-b-10-force">
+              <label class="form-control-label">Brand</label>
+              <select class="form-control select2" name="brand_id" data-placeholder="Choose one"
+              data-parsley-class-handler="#slWrapper"
+              data-parsley-errors-container="#slErrorContainer" required>
+              <option selected="" disabled="">Select Brand</option>
+              @foreach ($allBrand as $data)
+              <option value="{{$data->id}}">{{$data->brand_name}}</option>
+              @endforeach
+              </select>
+            </div>
+          </div><!-- col-12 -->
+
            <div class="col-lg-12">
             <div class="form-group mg-b-10-force">
               <label class="form-control-label">Color</label>
@@ -80,6 +108,20 @@
               <option selected="" disabled="">Select Color</option>
               @foreach ($allColor as $data)
               <option value="{{$data->id}}">{{$data->color_name}}</option>
+              @endforeach
+              </select>
+            </div>
+          </div><!-- col-12 -->
+
+          <div class="col-lg-12">
+            <div class="form-group mg-b-10-force">
+              <label class="form-control-label">Size</label>
+              <select class="form-control select2" name="size_id" data-placeholder="Choose one"
+              data-parsley-class-handler="#slWrapper"
+              data-parsley-errors-container="#slErrorContainer" required>
+              <option selected="" disabled="">Select Size</option>
+              @foreach ($allSize as $data)
+              <option value="{{$data->id}}">{{$data->size_name}}</option>
               @endforeach
               </select>
             </div>

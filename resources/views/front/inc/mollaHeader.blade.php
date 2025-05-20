@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Ecommerce</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Molla - Bootstrap eCommerce Template">
     <meta name="author" content="p-themes">
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
@@ -21,21 +22,25 @@
     <meta name="apple-mobile-web-app-title" content="Molla">
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+    <meta name="msapplication-config" content="{{asset('assets/images/icons/browserconfig.xml')}}">
     <meta name="theme-color" content="#ffffff">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/nouislider/nouislider.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/plugins/nouislider/nouislider.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.exzoom.css')}}" type="text/css">
+
     
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-      <style>
+    <script>headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}</script>
+    
+    <style>
     
     .color-radio input[type="radio"] {
       display: none;
@@ -85,21 +90,8 @@
 
 <body> 
 <header class="header">
-    <div class="header-top" style="background: #c96; color: #000;">
+    <div class="header-top" style="background: #fff; color: #000;">
         <div class="container">
-            <div class="header-left"> 
-                <div class="header-dropdown">
-                    <a href="#">Eng</a>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">English</a></li>
-                            <li><a href="#">French</a></li>
-                            <li><a href="#">Spanish</a></li>
-                        </ul>
-                    </div><!-- End .header-menu -->
-                </div><!-- End .header-dropdown -->
-            </div><!-- End .header-left -->
-
             <div class="header-right">
 
                 <ul class="top-menu">
@@ -120,7 +112,7 @@
                     </li>
                 </ul><!-- End .top-menu -->
                 
-                <div class="header-dropdown">
+                <div class="header-dropdown" style="font-weight: 500;">
                 @if(Auth::check())  
                 {{ Auth::user()->name }}
                 <div class="header-menu">
@@ -144,8 +136,9 @@
         </div><!-- End .container -->
     </div><!-- End .header-top -->
 
-    <div class="header-middle sticky-header" style="border-bottom: 1px solid #c96; margin-bottom: 20px;">
+    <div class="header-middle sticky-header custom-header" style="margin-bottom: 20px; background:rgba(255, 193, 7, 1);">
         <div class="container">
+            
             <div class="header-left">
                 <button class="mobile-menu-toggler">
                     <span class="sr-only">Toggle mobile menu</span>
@@ -153,7 +146,8 @@
                 </button>
 
                 <a href="{{route('home')}}" class="logo">
-                    <img src="{{asset('assets/images/logo.png')}}" alt="Molla Logo" width="105" height="25">
+                    <span style="font-size: 24px; color:rgba(220, 53, 69, 1); font-weight:500;">Online Shop</span>
+                    <!-- <img src="{{asset('assets/images/logo.png')}}" alt="Molla Logo" width="105" height="25"> -->
                 </a>
 
                 <nav class="main-nav">
@@ -164,22 +158,11 @@
                         </li>
                         
                         <li>
-                            <a href="category.html" class="">Shop</a>
+                            <a href="{{route('product.shop')}}" class="">Shop</a>
 
 
                         </li>
-                        <li>
-                            <a href="product.html" class="">Cart</a>
-
-                        </li>
-                        <li>
-                            <a href="#" class="">Checkout</a>
-
-                        </li>
-                        <li>
-                            <a href="blog.html" class="">Blog</a>
-
-                        </li>
+                        
                         
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
