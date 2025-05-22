@@ -56,7 +56,10 @@ Route::middleware('auth', 'verified')->group(function () {
 
 //ClaintController without middleware
 Route::controller(ClaintController::class)->group(function(){
-    Route::get('/front/pages/categoryPage/{id}/{slug}', 'CategoryPage')->name('front.pages.categoryPage');
+    Route::get('/front/pages/categoryPage/{id}/{slug}', 'categoryPage')->name('front.pages.categoryPage');
+   
+    Route::get('/front/pages/subCategoryPage/{id}/{slug}', 'subCategoryPage')->name('front.pages.subCategoryPage');
+    
     Route::get('/front/pages/newReleasePage/', 'NewReleasePage')->name('front.pages.newReleasePage');
 
 
@@ -282,16 +285,8 @@ Route::middleware('auth')->group(function () {
        Route::get('/filter-products', 'filter')->name('filter-products'); // AJAX endpoint
 
 
+
 });
-
-
-//category/subcategory/product dropdown
-
-    Route::get('/home', [HomeController::class, 'index']);
-    Route::get('/get-subcategories/{category_id}', [HomeController::class, 'getSubCategories']);
-    Route::get('/get-products/{sub_category_id}', [HomeController::class, 'getProducts']);
-
-
 
 
 

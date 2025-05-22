@@ -82,4 +82,9 @@ class SubCategoryController extends Controller
         SubCategory::FindOrFail($id)->delete();
         return back()->with('success', 'Success! data delete Successfully');
     }
+
+
+
+
+
 }

@@ -1,4 +1,6 @@
-@include('inc.header')
+@extends('product.layouts.shopTemplate')
+@section('content')
+
 <div class="container">
     <!-- <h2 class="pt-5">{{$allCategory->category_name}} - ({{$allCategory->product_count}})</h2> -->
     <h2 class="pt-5">{{$allCategory->category_name}}</h2>
@@ -23,7 +25,6 @@
          @endif   
         </div>
    </div>
-@include('inc.footer')
 
 
-<
+@endsection

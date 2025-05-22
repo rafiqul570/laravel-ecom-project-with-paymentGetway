@@ -1,15 +1,14 @@
 @extends('front.pages.layouts.pageTemplate')
 @section('content')
 
-    
-<div class="container">
-<div class="row">
-    <h2 class="my-5">Products in {{ $category->category_name }} ({{ $products->total() }})</h2>
+    <div class="container">
+    <div class="row">
+    <h2 class="my-5">Products in {{ $subCategory->subCategory_name }} ({{ $products->total() }})</h2>
 
     @if($products->isEmpty())
         <p>No products available in this category.</p>
     @else
-    
+   
     @foreach($products as $data)
     <div id="home" class="col-md-3">
             <div class="card shadow-sm">
@@ -23,11 +22,13 @@
         </div>
        </div>
     @endforeach
+</div>
+</div>
+    <!-- Pagination links -->
+    <div class="mt-4">
+        {{ $products->links() }}
+    </div>
+@endif
 
-  @endif
-</div>
-</div>
-    
+
 @endsection
-
-

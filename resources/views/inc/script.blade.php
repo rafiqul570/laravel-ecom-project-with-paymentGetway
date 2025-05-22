@@ -98,5 +98,28 @@
 </script>
 
 
+
+<!-- JavaScript for Click + Redirect -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInputHome");
+
+    document.querySelectorAll(".category-link").forEach(function (link) {
+      link.addEventListener("click", function () {
+        const slug = this.getAttribute("data-slug");
+        const id = this.getAttribute("data-id");
+
+        // Set the slug into the visible search input
+        searchInput.value = slug;
+
+        // Optional: Trigger the click on search button (or redirect directly)
+        window.location.href = `/front/pages/categoryPage/${id}/${slug}`;
+      });
+    });
+  });
+</script>
+
+
+
 </body>
 </html>

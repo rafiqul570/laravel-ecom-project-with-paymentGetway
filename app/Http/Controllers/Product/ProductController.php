@@ -248,15 +248,13 @@ class ProductController extends Controller
         return view('product.shop', compact('categories', 'subCategories', 'products', 'brands', 'colors', 'sizes'));
     }
 
+    
+    // sidebar Filter in shop page
+
     public function filter(Request $request)
     {
         $query = Product::query();
-
-        // if ($request->search) {
-        //     $query->where('slug', 'like', '%' . $request->search . '%');
-        // }
-
-            
+  
         if ($request->search) {
            $query->where(function ($q) use ($request) {
            $q->where('product_name', 'like', '%' . $request->search . '%')
@@ -300,6 +298,33 @@ class ProductController extends Controller
 
         return response()->json($products);
     }
+
+
+
+
+// category/subcategory dwopdown in homepage
+
+    public function shopPage(Request $request)
+{
+    $categories = Category::all();
+    $subCategories = SubCategory::all();
+    $brands = Brand::all();
+    $colors = Color::all();
+    $sizes = Size::all();
+
+    if ($request->has('category_id')) {
+        $products = Product::where('category_id', $request->category_id)->get();
+    } elseif ($request->has('subcategory_id')) {
+        $products = Product::where('subcategory_id', $request->subcategory_id)->get();
+    } else {
+        $products = Product::all();
+    }
+
+    return view('product.shop', compact('categories', 'subCategories', 'brands', 'colors', 'sizes', 'products'));
+}
+
+
+
 
     
 

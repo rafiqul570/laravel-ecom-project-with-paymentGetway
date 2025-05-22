@@ -24,6 +24,8 @@
 
       <!-- Search -->
       <input type="text" class="form-control me-2" id="searchInput"  autocomplete="off" placeholder="Search products...">
+
+      <input type="hidden" id="searchInput" oninput="storeSearchQuery()" class="form-control mb-3" placeholder="Search products...">
     
       <button class="btn btn-danger" id="searchBtn"><i class="bi bi-search"></i></button>
 
@@ -68,7 +70,7 @@
 </nav>
 
 <!-- Navigation + Category -->
-<div class="navbar navbar-expand-lg navbar-light bg-white">
+<!-- <div class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
     <div class="category-wrapper">
       <div class="category-trigger fw-bold text-dark">All Categories</div>
@@ -101,3 +103,38 @@
     </div>
   </div>
  </div>
+
+ -->
+
+
+ <div class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+    <div class="category-wrapper">
+      <div class="category-trigger fw-bold text-dark">All Categories</div>
+      <ul class="category-menu list-unstyled mb-0" id="dropdownCategory">
+        @if($categories->isEmpty())
+        
+        <p>No data found.</p>
+        
+        @else
+       @foreach($categories as $category)
+      <li>
+        <span style="cursor: pointer;" class="category-link" data-id="{{ $category->id }}" data-slug="{{ $category->slug }}">
+          {{ $category->category_name }}
+        </span>
+        <ul class="sub-category-menu list-unstyled mb-0">
+          @foreach($category->subCategories as $sub)
+          <li class="sub-category-item">
+            <span style="cursor: pointer;" class="sub-category-link" data-id="{{ $sub->id }}" data-slug="{{ $sub->slug }}">
+              {{ $sub->subCategory_name }}
+            </span>
+          </li>
+          @endforeach
+        </ul>
+      </li>
+      @endforeach
+       @endif
+    </ul>
+   </div>
+  </div>
+  </div>

@@ -4,7 +4,7 @@
   <!-- Top Bar -->
   <div class="top-bar py-2 text-end px-4">
     <a href="#">Save More on App</a>
-    <a href="{{route('product.shop')}}">Shop</a>
+    <a style="font-weight: bold; color:red" href="{{route('product.shop')}}">Shop</a>
     <a href="#">Help & Support</a>
     <a href="{{ route('register') }}">Signup</a>
     <a href="{{route('cart')}}"><i class="bi bi-cart3 text-warning" style="font-size: 20px; color: #000;"></i><span id="cart-count" class="text-dark"> 0</span></a>
@@ -25,8 +25,9 @@
     <div class="collapse navbar-collapse" id="mainNavbar">
 
       <!-- Search -->
-      <input type="text" class="form-control me-2" id="searchInputHome"  autocomplete="off" placeholder="Search products...">
-      <input type="hidden" id="searchInput" class="form-control mb-3" placeholder="Search products...">
+      <input type="text" class="form-control me-2" id="searchInputHome"   autocomplete="off" placeholder="Search products...">
+      <input type="hidden" id="searchInput" oninput="storeSearchQuery()" class="form-control mb-3" placeholder="Search products...">
+      
       <button class="btn btn-danger" id="searchBtn"><i class="bi bi-search"></i></button>
 
       <!-- Right:Cart -->
@@ -35,12 +36,6 @@
           <a class="nav-link" href="#"></a>
         </li>
 
-        <!-- <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="#">
-            <i class="bi bi-cart3" style="font-size: 20px; color: #000;"></i>
-            <span id="cart-count" style="margin-left: 4px;">0</span>
-          </a>
-        </li> -->
 
         <li class="nav-item" style="margin-left: 10px;">
           
@@ -88,21 +83,19 @@
           <a class="nav-link" href="{{route('front.pages.categoryPage',[$category->id, $category->slug] )}}">{{$category->category_name}}</a>
 
           <ul class="sub-category-menu list-unstyled mb-0">
-             @foreach($category->subCategories as $sub)
-            <li class="sub-category-item">
-              {{$sub->subCategory_name}}
-              <div class="product-menu">
-                 @foreach($sub->products as $product)
-                <a style="text-decoration:none;" href="#">{{$product->product_name}}</a>
-                @endforeach
-              </div>
-            </li>
-            @endforeach
-          </ul>
-        </li>
-        @endforeach
-       @endif
-      </ul>
-    </div>
+           @foreach($category->subCategories as $sub)
+           <li class="sub-category-item">
+            <a class="nav-link" href="{{route('front.pages.subCategoryPage',[$sub->id, $sub->slug] )}}">{{$sub->subCategory_name}}
+          </li>
+          @endforeach
+        </ul>
+      </li> 
+      @endforeach
+     @endif
+    </ul>
   </div>
  </div>
+</div> 
+
+
+
