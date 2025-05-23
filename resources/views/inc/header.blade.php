@@ -1,4 +1,20 @@
-<!-- Navber Part -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Shop</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/custom.css')}}">
+
+</head>
+
 <body>
   
   <!-- Top Bar -->
@@ -73,19 +89,23 @@
       <ul class="category-menu list-unstyled mb-0" id="dropdownCategory">
         @if($categories->isEmpty())
         
-        <p>No data found.</p>
+        <p>Data Not Found....</p>
         
         @else
          
          @foreach($categories as $category)
         <li>
           
-          <a class="nav-link" href="{{route('front.pages.categoryPage',[$category->id, $category->slug] )}}">{{$category->category_name}}</a>
+          <a class="nav-link" href="{{route('front.pages.categoryPage',[$category->id, $category->slug] )}}">{{$category->category_name}}
+          </a>
 
           <ul class="sub-category-menu list-unstyled mb-0">
            @foreach($category->subCategories as $sub)
            <li class="sub-category-item">
+            
             <a class="nav-link" href="{{route('front.pages.subCategoryPage',[$sub->id, $sub->slug] )}}">{{$sub->subCategory_name}}
+            </a>
+          
           </li>
           @endforeach
         </ul>

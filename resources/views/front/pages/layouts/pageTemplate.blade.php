@@ -1,4 +1,3 @@
-@include('inc.link-css')
 @include('inc.header')
 
 	@yield('content')

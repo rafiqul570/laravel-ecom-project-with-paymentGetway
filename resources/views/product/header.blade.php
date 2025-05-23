@@ -70,44 +70,7 @@
 </nav>
 
 <!-- Navigation + Category -->
-<!-- <div class="navbar navbar-expand-lg navbar-light bg-white">
-  <div class="container">
-    <div class="category-wrapper">
-      <div class="category-trigger fw-bold text-dark">All Categories</div>
-      <ul class="category-menu list-unstyled mb-0">
-        @if($categories->isEmpty())
-
-        <p>No data found.</p>
-        
-        @else
-         
-         @foreach($categories as $category)
-        <li>
-          {{$category->category_name}}
-          <ul class="sub-category-menu list-unstyled mb-0">
-             @foreach($category->subCategories as $sub)
-            <li class="sub-category-item">
-              {{$sub->subCategory_name}}
-              <div class="product-menu">
-                 @foreach($sub->products as $product)
-                <a href="#">{{$product->product_name}}</a>
-                @endforeach
-              </div>
-            </li>
-            @endforeach
-          </ul>
-        </li>
-        @endforeach
-       @endif
-      </ul>
-    </div>
-  </div>
- </div>
-
- -->
-
-
- <div class="navbar navbar-expand-lg navbar-light bg-white">
+<div class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
     <div class="category-wrapper">
       <div class="category-trigger fw-bold text-dark">All Categories</div>
@@ -117,24 +80,27 @@
         <p>No data found.</p>
         
         @else
-       @foreach($categories as $category)
-      <li>
-        <span style="cursor: pointer;" class="category-link" data-id="{{ $category->id }}" data-slug="{{ $category->slug }}">
-          {{ $category->category_name }}
-        </span>
-        <ul class="sub-category-menu list-unstyled mb-0">
-          @foreach($category->subCategories as $sub)
-          <li class="sub-category-item">
-            <span style="cursor: pointer;" class="sub-category-link" data-id="{{ $sub->id }}" data-slug="{{ $sub->slug }}">
-              {{ $sub->subCategory_name }}
-            </span>
+         
+         @foreach($categories as $category)
+        <li>
+          
+          <a class="nav-link" href="{{route('front.pages.categoryPage',[$category->id, $category->slug] )}}">{{$category->category_name}}</a>
+
+          <ul class="sub-category-menu list-unstyled mb-0">
+           @foreach($category->subCategories as $sub)
+           <li class="sub-category-item">
+            <a class="nav-link" href="{{route('front.pages.subCategoryPage',[$sub->id, $sub->slug] )}}">{{$sub->subCategory_name}}
+
           </li>
           @endforeach
         </ul>
-      </li>
+      </li> 
       @endforeach
-       @endif
+     @endif
     </ul>
-   </div>
   </div>
-  </div>
+ </div>
+</div> 
+
+
+

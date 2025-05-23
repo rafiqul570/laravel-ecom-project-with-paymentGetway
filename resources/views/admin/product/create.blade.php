@@ -29,6 +29,16 @@
 
           <div class="col-lg-12">
             <div class="form-group">
+              <label class="form-control-label">Discount price</label>
+              <input class="form-control" type="number" name="discount_price" placeholder="">
+            </div>
+            <h6 class="col-sm-12 d-flex justify-content-center">
+               <x-input-error :messages="$errors->get('discount_price')" class="mt-2 " />
+            </h6>
+          </div><!-- col-12 -->
+
+          <div class="col-lg-12">
+            <div class="form-group">
               <label class="form-control-label">Quantity</label>
               <input class="form-control" type="number" name="product_quantity" placeholder="">
             </div>

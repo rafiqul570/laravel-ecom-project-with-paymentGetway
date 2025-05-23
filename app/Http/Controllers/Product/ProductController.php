@@ -39,11 +39,15 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'product_price' => 'required',
+            'discount_price' => 'nullable|string',
             'category_id' => 'required',
             'sub_category_id' => 'required',
-            'brand_id' => 'required',
-            'color_id' => 'required',
-            'size_id' => 'required',
+            'brand_id' => 'nullable|integer',
+            'brand_name' => 'nullable|string',
+            'color_id' => 'nullable|integer',
+            'color_name' => 'nullable|string',
+            'size_id' => 'nullable|integer',
+            'size_name' => 'nullable|string',
             'product_quantity' => ['required', 'integer', 'min:1'],
             'short_description' => 'required',
             'long_description' => 'required',
@@ -79,6 +83,7 @@ class ProductController extends Controller
         Product::insert([
             'product_name' => $request->product_name,
             'product_price' => $request->product_price,
+            'discount_price' => $request->discount_price,
             'product_quantity' => $request->product_quantity,
             'category_id' => $request->category_id,
             'category_name' => $category_name,
@@ -161,6 +166,7 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'product_price' => 'required',
+            'discount_price' => 'required',
             'product_color' => 'required',
             'product_size' => 'required',
             'product_quantity' => 'required',
@@ -189,6 +195,7 @@ class ProductController extends Controller
         Product::FindOrFail($id)->update([
             'product_name' => $request->product_name,
             'product_price' => $request->product_price,
+            'discount_price' => $request->discount_price,
             'product_color' => $request->product_color,
             'product_size' => $request->product_size,
             'product_quantity' => $request->product_quantity,
@@ -299,34 +306,7 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-
-
-
-// category/subcategory dwopdown in homepage
-
-    public function shopPage(Request $request)
-{
-    $categories = Category::all();
-    $subCategories = SubCategory::all();
-    $brands = Brand::all();
-    $colors = Color::all();
-    $sizes = Size::all();
-
-    if ($request->has('category_id')) {
-        $products = Product::where('category_id', $request->category_id)->get();
-    } elseif ($request->has('subcategory_id')) {
-        $products = Product::where('subcategory_id', $request->subcategory_id)->get();
-    } else {
-        $products = Product::all();
-    }
-
-    return view('product.shop', compact('categories', 'subCategories', 'brands', 'colors', 'sizes', 'products'));
-}
-
-
-
-
-    
+   
 
     
 }

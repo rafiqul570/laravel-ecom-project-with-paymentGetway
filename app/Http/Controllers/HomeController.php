@@ -44,7 +44,9 @@ class HomeController extends Controller
         
         }else{
            
-            return view('home');
+            $categories = Category::all();
+            $allProduct = Product::latest()->get();
+            return view('home', compact('allProduct','categories'));
         
         }
 
@@ -53,14 +55,14 @@ class HomeController extends Controller
 
 
 
-  //data show home page
-  public function home(){
-    $categories = Category::all();
-    $subCategories = SubCategory::all();
-    $allProduct = Product::latest()->get();
-    $categories = Category::with('subCategories.products')->get();
-    return view('home', compact('allProduct','categories', 'categories', 'subCategories'));
-    }
+      //data show home page
+      public function home(){
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $allProduct = Product::latest()->get();
+        $categories = Category::with('subCategories.products')->get();
+        return view('home', compact('allProduct','categories', 'categories', 'subCategories'));
+        }
 
 
 

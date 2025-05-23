@@ -20,13 +20,14 @@ return new class extends Migration
             $table->string('category_name');
             $table->integer('sub_category_id');
             $table->string('subCategory_name');
-            $table->integer('brand_id');
+            $table->integer('brand_id')->nullable();
             $table->string('brand_name')->nullable();
-            $table->integer('color_id');
+            $table->integer('color_id')->nullable();
             $table->string('color_name')->nullable();
-            $table->integer('size_id');
+            $table->integer('size_id')->nullable();
             $table->string('size_name')->nullable();
             $table->string('product_price');
+            $table->string('discount_price')->nullable();
             $table->string('product_quantity');
             $table->text('short_description');
             $table->text('long_description');
@@ -45,5 +46,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+       
     }
 };

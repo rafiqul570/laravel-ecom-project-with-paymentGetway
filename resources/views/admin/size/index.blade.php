@@ -29,7 +29,7 @@
              </thead>
 
              <tbody>
-                @foreach ($allCategory as $key => $data)
+                @foreach ($allSize as $key => $data)
                <tr>
                  <td>{{++$key}}</td>
                  <td>{{$data->size_name}}</td>

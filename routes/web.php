@@ -285,8 +285,7 @@ Route::middleware('auth')->group(function () {
        Route::get('/filter-products', 'filter')->name('filter-products'); // AJAX endpoint
 
 
-
-});
+    });
 
 
 

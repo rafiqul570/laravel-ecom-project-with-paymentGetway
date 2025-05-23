@@ -16,7 +16,7 @@
   </script>
 
 
-<!-- search -->
+<!--Filter sidebar search -->
 <script>
   $(document).ready(function () {
     // Get search from URL (e.g., ?search=laptop)
@@ -73,7 +73,6 @@
     }
   });
 </script>
-
 
 
 
