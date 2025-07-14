@@ -8,17 +8,18 @@ use App\Http\Controllers\Product\SubCategoryController;
 use App\Http\Controllers\Product\BrandController;
 use App\Http\Controllers\Product\ColorController;
 use App\Http\Controllers\product\SizeController;
-use App\Http\Controllers\Product\ShippingcostController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\ShippingController;
 use App\Http\Controllers\Order\CartController;
 use App\Http\Controllers\Order\BillingController;
 use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\Order\ShippingController;
 use App\Http\Controllers\Order\PaymentController;
 use App\Http\Controllers\ClaintController;
-use App\Http\Controllers\BkashController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BkashTokenizePaymentController;
+use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\InvoiceController;
 
 use App\Models\User;
 
@@ -95,16 +96,6 @@ Route::controller(BillingController::class)->group(function(){
 });
 
 
-//ShippingController
-Route::middleware('auth')->group(function () {
-Route::controller(ShippingController::class)->group(function(){
-    Route::get('/shipping', 'shippingInfo')->name('shipping');
-    
-   });
-
-});
-
-
 
 //PaymentController
 Route::middleware('auth')->group(function () {
@@ -120,23 +111,28 @@ Route::controller(PaymentController::class)->group(function(){
 //OrderController
 Route::middleware('auth')->group(function () {
 Route::controller(OrderController::class)->group(function(){
+    
     Route::get('/admin/order', 'order')->name('admin.order');
+    
     Route::get('/admin/pdf/invoice/{id}', 'print_pdf')->name('admin.pdf.invoice');
+    
     Route::get('/admin/send_email/{id}', 'send_email')->name('admin.send_email');
+    
     Route::post('/admin/send_user_email/{id}', 'send_user_email')->name('admin.send_user_email');
 
   
     Route::post('/order/store', 'store')->name('order.store');
+    
     Route::get('/order/delivered/{id}', 'delivered')->name('order.delivered');
+    
     Route::get('/pendingOrders', 'pendingOrders')->name('pendingOrders');
 
-    
-    
-    
+    Route::get('/orders/thankyou', 'orders_confurm')->name('orders.thankyou');
     
    });
 
 });
+
 
 
 //Bkashcontroller-2
@@ -245,11 +241,16 @@ Route::middleware('auth')->group(function () {
 
 // ShippingCost
 Route::middleware('auth')->group(function () {
-    Route::controller(ShippingcostController::class)->group(function(){
+    Route::controller(ShippingController::class)->group(function(){
+        
         Route::get('/admin/shippingcost/index', 'index')->name('admin.shippingcost.index');
         Route::get('/admin/shippingcost/create', 'create')->name('admin.shippingcost.create');
         Route::post('/admin/shippingcost/store', 'store')->name('admin.shippingcost.store');
         Route::get('/admin/shippingcost/delete/{id}', 'delete')->name('admin.shippingcost.delete');
+
+
+        Route::get('/shipping', 'shippingInfo')->name('shipping');
+    
 
     });
 });
@@ -286,6 +287,44 @@ Route::middleware('auth')->group(function () {
 
 
     });
+
+
+
+Route::middleware(['auth'])->group(function () {
+//OrderController
+    Route::post('/checkout/initiate', [OrderController::class, 'store'])->name('checkout.initiate'); // মেথডের নাম store ব্যবহার করলে
+    Route::get('/payment-options/{order_id}', [OrderController::class, 'showPaymentOptions'])->name('payment.options');
+    Route::post('/process-payment-selection/{order_id}', [OrderController::class, 'processSelection'])->name('payment.process.selection');
+    
+//InvoiceController
+    Route::get('/invoce/success/{order_id}', [InvoiceController::class, 'orderSuccess'])->name('order.success');
+
+    Route::get('/order/{order_id}', [InvoiceController::class, 'show'])->name('order.show');
+    
+    Route::get('/invoice/download/{order_id}', [InvoiceController::class, 'downloadPDF'])->name('order.download');
+
+    // =====================================================================
+    //  পেমেন্ট গেটওয়ে রাউট (Payment Gateway Routes)
+    // =====================================================================
+    
+    // --- BKASH PAYMENT FLOW ---
+    Route::get('/bkash/payment/{order_id}', [BkashTokenizePaymentController::class, 'index'])->name('bkash.payment');
+    Route::post('/bkash/create-payment', [BkashTokenizePaymentController::class, 'createPayment'])->name('bkash.create-payment');
+    Route::get('/bkash/callback', [BkashTokenizePaymentController::class, 'callBack'])->name('bkash.callback');
+    // অন্যান্য বিকাশ রাউট...
+
+    // --- STRIPE (CARD) PAYMENT FLOW ---
+    Route::get('/stripe-payment/{order_id}', [StripePaymentController::class, 'showPaymentForm'])->name('stripe.payment.form');
+    Route::post('/stripe-payment', [StripePaymentController::class, 'processPayment'])->name('stripe.payment.process');
+
+
+
+});
+
+
+
+
+
 
 
 

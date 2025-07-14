@@ -229,8 +229,6 @@ function selectColor(colorName) {
 }
 </script>
 
-
-
   
 </body>
 </html>

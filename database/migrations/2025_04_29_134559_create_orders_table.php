@@ -15,24 +15,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
-            $table->string('city')->nullable();
-            $table->string('postcode')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-
-            $table->string('product_id')->nullable();
-            $table->string('product_name')->nullable();
-            $table->string('product_color')->nullable();
-            $table->string('product_size')->nullable();
-            $table->string('product_img')->nullable();
-            $table->string('product_price')->nullable();
-            $table->string('product_quantity')->nullable();
-            $table->integer('shippingCost')->nullable();
-            $table->string('total_price')->nullable();
-
-            $table->string('payment_status')->nullable();
-            $table->string('delivery_status')->nullable();
+            $table->string('invoice_no')->unique();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
+            $table->string('payment_method')->nullable(); // 'cash', 'bkash', 'visa'
+            $table->string('payment_id')->nullable();
+            $table->string('trx_id')->nullable();
+            $table->string('status')->default('pending'); // pending, paid, failed, etc.
             $table->timestamps();
         });
     }

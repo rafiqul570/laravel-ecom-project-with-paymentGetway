@@ -24,7 +24,7 @@ class SizeController extends Controller
             'size_name' => 'required|unique:sizes',
         ]);
 
-        Size::insert([
+        Size::create([
             'size_name' => $request->size_name,
             'slug' => strtolower(str_replace( '', '-', $request->size_name))
         ]);

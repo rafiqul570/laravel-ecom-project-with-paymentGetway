@@ -28,13 +28,19 @@ class CartController extends Controller
 
 
     public function store(Request $request){
+
+            $request->validate([
+            'product_price' => 'nullable|string',
+            'discount_price' => 'nullable|string',
+            
+            ]);
             
             $product_price = $request->product_price;
             $product_quantity = $request->product_quantity;
             $total_price = $product_price * $product_quantity;
+            
 
-
-        Cart::insert([
+        Cart::create([
 
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,

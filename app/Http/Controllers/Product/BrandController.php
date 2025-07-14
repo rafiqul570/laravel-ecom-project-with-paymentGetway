@@ -24,7 +24,7 @@ class BrandController extends Controller
             'brand_name' => 'required|unique:brands',
         ]);
 
-        Brand::insert([
+        Brand::create([
             'brand_name' => $request->brand_name,
             'slug' => strtolower(str_replace( '', '-', $request->brand_name))
         ]);

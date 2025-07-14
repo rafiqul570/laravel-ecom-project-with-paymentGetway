@@ -45,26 +45,33 @@
                     <div class="product-details">
                         <h1 class="product-title" style="padding-top: 15px;">{{$product->product_name}}</h1>
 
+                        
                         <div class="product-price my-5">
-                         <span style="font-size: 16px; margin-right:10px;">Price: ${{$product->product_price}}</span>
+                            @if($product->discount_price > 0)
+                                {{-- যদি ছাড়ের মূল্য থাকে এবং তা ০-এর চেয়ে বেশি হয় --}}
+                                <span class="price">৳ {{ number_format($product->discount_price, 2) }}</span>
+                                <span class="ms-5 text-muted"><del class="original-price fw-bold">৳ {{ number_format($product->product_price, 2) }}</del></span>
+                            @else
+                                {{-- যদি কোনো ছাড় না থাকে --}}
+                                <span class="price">৳ {{ number_format($product->product_price, 2) }}</span>
+                            @endif
                         </div><!-- End .product-price -->
 
                         <!-- Colors -->
-                        @if(empty($product->color_name))
-                        
-
-                        @else
-                        
-
+                      
                         <!-- Display selected color name -->
+                        @if($product->color_name)
                         <div class="mb-1">
                             <div class="color-radio d-flex flex-wrap gap-2">
                                 <span class="product-price" style="font-size: 16px; margin-right:10px;">Color:</span>
+                           
                                 <input type="radio" id="color-radio" name="product_color" value="{{$product->color_name}}" checked hidden>
                                 <label id="color-label" for="color-radio">{{$product->color_name}}</label>
+                                
                             </div>
                         </div>
-
+                      
+                        
                         <!-- Related Product Colors -->
                         <div class="mb-3">
                             <div class="color-radio d-flex flex-wrap gap-2" style="margin-left: 50px;">
@@ -79,8 +86,9 @@
                                 @endforeach
                             </div>
                         </div>
-                        
+                       @endif
 
+                       @if($product->size_name)
                         <div class="details-filter-row details-row-size mb-3">
                           <label for="size">Select Size:</label>
                            <div class="d-flex flex-wrap">
@@ -97,8 +105,7 @@
                             <label for="size-xl" class="size-label">XL</label>
                            </div>
                          </div><!-- End .details-filter-row -->
-
-                        @endif
+                         @endif
 
                          </div><!-- End .details-filter-row -->
                          @if($product->product_quantity)
@@ -122,7 +129,15 @@
                         
                         <input type="hidden" name="product_img" value="{{$product->product_img}}">
 
+                        @if($product->discount_price > 0)
+
+                        <input type="hidden" name="discount_price" value="{{$product->discount_price}}">
+                       
+                        @else
+
                         <input type="hidden" name="product_price" value="{{$product->product_price}}">
+
+                        @endif
                         
                         <input type="hidden" name="shippingCost" value="{{$product->shippingCost}}">
 

@@ -16,6 +16,7 @@ class Cart extends Model
         'product_color',
         'product_size',
         'product_img',
+        'discount_price',
         'product_price',
         'product_quantity',
         'shippingCost',

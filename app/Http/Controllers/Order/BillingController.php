@@ -47,7 +47,7 @@ class BillingController extends Controller
     public function store(Request $request){
 
 
-        Billing::insert([
+        Billing::create([
             'user_id' => Auth::id(),
             'name' => $request->name,
             'email' => $request->email,

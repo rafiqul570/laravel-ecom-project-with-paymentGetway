@@ -25,7 +25,7 @@ class ColorController extends Controller
             'color_name' => 'required|unique:colors',
         ]);
 
-        Color::insert([
+        Color::create([
             'color_name' => $request->color_name,
             'slug' => strtolower(str_replace( '', '-', $request->color_name))
         ]);

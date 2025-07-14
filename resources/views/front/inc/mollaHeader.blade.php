@@ -14,8 +14,8 @@
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png"> -->
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png"> -->
     <link rel="manifest" href="assets/images/icons/site.html">
     <link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
     <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
@@ -41,6 +41,85 @@
     <script>headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}</script>
     
     <style>
+
+    .payment-methods-list .payment-method-item {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: .375rem;
+        margin-bottom: 0.75rem;
+        transition: all 0.2s ease-in-out;
+    }
+    .payment-methods-list .payment-method-item:hover {
+        background-color: #e9ecef;
+    }
+    .payment-methods-list .form-check-input {
+        float: none;
+        margin-right: 0.75rem;
+    }
+    .payment-methods-list .form-check-label {
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .card-title {
+        color: #333;
+    }
+    .summary-title {
+        color: #333;
+    }
+    .table-summary td {
+        border-top: none;
+    }
+    .table-summary .summary-total td {
+        border-top: 1px solid #dee2e6;
+        font-size: 1.1rem;
+    }
+    .btn-order {
+        padding: 0.75rem;
+        font-weight: 600;
+    }
+
+    .payment-options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    .payment-option input[type="radio"] {
+        display: none;
+    }
+    .payment-option-label {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: #fff;
+    }
+    .payment-option-label:hover {
+        border-color: #0d6efd;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    .payment-option input[type="radio"]:checked + .payment-option-label {
+        border-color: #0d6efd;
+        background-color: #f8faff;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+    }
+    .payment-option-icon {
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    .payment-option-icon img {
+        height: 40px;
+        width: auto;
+        max-width: 60px;
+    }
+    .payment-option-content {
+        line-height: 1.4;
+    }
     
     .color-radio input[type="radio"] {
       display: none;
@@ -146,21 +225,15 @@
                 </button>
 
                 <a href="{{route('home')}}" class="logo">
-                    <span style="font-size: 24px; color:rgba(220, 53, 69, 1); font-weight:500;">Online Shop</span>
+                    <span style="font-size: 24px; color:rgba(220, 53, 69, 1); font-weight:500;">MIMSHOP</span>
                     <!-- <img src="{{asset('assets/images/logo.png')}}" alt="Molla Logo" width="105" height="25"> -->
                 </a>
 
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
-                        <li class="megamenu-container active">
-                            <a href="{{route('home')}}" class="">Home</a>
-
-                        </li>
                         
                         <li>
                             <a href="{{route('product.shop')}}" class="">Shop</a>
-
-
                         </li>
                         
                         

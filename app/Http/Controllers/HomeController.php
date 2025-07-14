@@ -34,9 +34,9 @@ class HomeController extends Controller
               $total_revenue = $total_revenue + $order->product_price; 
             }
 
-            $total_deliverd = Order::where('delivery_status', '=', 'delivered')->get()->count();
+            $total_deliverd = Order::where('status', '=', 'delivered')->get()->count();
             
-            $total_processing = Order::where('delivery_status', '=', 'processing')->get()->count();
+            $total_processing = Order::where('status', '=', 'processing')->get()->count();
 
 
             

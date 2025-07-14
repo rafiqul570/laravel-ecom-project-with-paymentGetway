@@ -54,8 +54,8 @@
                   <label class="form-group">Brand name</label>
                     <select class="form-control select2" name="brand_id" data-placeholder="Choose one"
                     data-parsley-class-handler="#slWrapper"
-                    data-parsley-errors-container="#slErrorContainer" required>
-                    <option selected>Choose Brand</option>
+                    data-parsley-errors-container="#slErrorContainer" >
+                    <option value="" selected>Choose Brand</option>
                     @foreach ($allBrand as $data)
                     <option value="{{$data->id}}">{{$data->brand_name}}</option>
                     @endforeach

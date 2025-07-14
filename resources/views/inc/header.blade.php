@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Online Shop</title>
+  <title>MIMSHOP</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +30,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow-sm py-2">
   <div class="container">
     <!-- Brand -->
-    <a class="navbar-brand fw-bold text-danger fs-4 p-3" href="{{route('home')}}">Online Shop</a>
+    <a class="navbar-brand fw-bold text-danger fs-4 p-3" href="{{route('home')}}">MIMSHOP</a>
 
     <!-- Toggler button for mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">

@@ -47,8 +47,12 @@
 							</h3><!-- End .product-title -->
 						</div><!-- End .product -->
 					</td>
-					<td class="price-col">&#2547 {{$item -> product_price}}</td>
-					
+					@if($item->discount_price > 0)
+					<td class="price-col">&#2547 {{number_format($item ->discount_price, 2) }}</td>
+					@else
+					<td class="price-col">&#2547 {{number_format($item ->product_price, 2) }}</td>
+
+					@endif
 					<td class="quantity-col">
 	                       <div class="cart-product-quantity">
 	                            <input type="number" class="update-qty" data-id="{{ $item->id }}" value="{{ $item->product_quantity }}" min="1">

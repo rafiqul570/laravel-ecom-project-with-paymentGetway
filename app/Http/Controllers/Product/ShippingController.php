@@ -5,14 +5,9 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Cart;
-use App\Models\Checkout;
-use App\Models\Order;
 use App\Models\Shippingcost;
 
-class ShippingcostController extends Controller
+class ShippingController extends Controller
 {
     public function index(){
         $shippingCost = Shippingcost::latest()->get();
@@ -30,7 +25,7 @@ class ShippingcostController extends Controller
             'shippingcost' => 'required',
         ]);
 
-        Shippingcost::insert([
+        Shippingcost::create([
             'shippingcost' => $request->shippingcost,
         ]);
 
@@ -65,6 +60,24 @@ class ShippingcostController extends Controller
     public function delete($id){
         Shippingcost::FindOrFail($id)->delete();
         return back()->with('success', 'Success! data delete Successfully');
+    }
+
+
+
+
+    public function shippingInfo(){
+
+        $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
+
+        $shippingCost = Cart::with('product')->where('user_id', auth()->id())->value('shippingCost');
+        
+        $total = $cartItems->sum(fn($item) => $item->product_price * $item->product_quantity);
+
+        $grand_total = $total + $shippingCost;
+        
+        $shippingAddress = Billing::where('user_id', auth()->id())->limit(1)->get(); //LIMIT
+
+        return view('shipping', compact('cartItems', 'shippingCost', 'total', 'grand_total', 'shippingAddress'));
     }
 
 }

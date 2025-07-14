@@ -12,23 +12,25 @@ class Order extends Model
     use  Notifiable;
 
      protected $fillable = [
-        'user_id',
-       
-        'city',
-        'postcode',
-        'email',
-        'phone',
+        'invoice_no', 'user_id', 'amount',
+        'payment_method', 'payment_id', 'trx_id', 'delivery_status',
+    ];
 
-        'product_id',
-        'product_name',
-        'product_color',
-        'product_size',
-        'product_img',
-        'product_price',
-        'product_quantity',
-        'shippingCost',
-        'total_price',
-           
-       
-     ];
+    // ✅ Relation to User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // ✅ Relation to OrderItems
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    // ✅ Relation to Billing Address
+    public function billing()
+    {
+        return $this->hasOne(Billing::class);
+    }
 }

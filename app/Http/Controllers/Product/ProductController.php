@@ -80,7 +80,7 @@ class ProductController extends Controller
             $size_name = Size::where('id', $size_id)->value('size_name');
            
 
-        Product::insert([
+        Product::create([
             'product_name' => $request->product_name,
             'product_price' => $request->product_price,
             'discount_price' => $request->discount_price,
