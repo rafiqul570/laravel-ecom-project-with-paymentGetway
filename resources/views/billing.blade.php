@@ -77,7 +77,15 @@
     						<tr>
     							<td><a href="#">{{$item -> product_name}}</a></td>
     							
-    							<td>&#2547 {{ number_format($item->product_price * $item->product_quantity, 2) }}</td>
+    							<!-- If the discount price is greater than zero,  -->
+    							<td>
+								    @if($item->discount_price > 0)
+								        ৳ {{ number_format($item->discount_price * $item->product_quantity, 2) }}
+								    @else
+								        ৳ {{ number_format($item->product_price * $item->product_quantity, 2) }}
+								    @endif
+								</td>
+    							
     						</tr>
     						@endforeach
     						<tr class="summary-total">
