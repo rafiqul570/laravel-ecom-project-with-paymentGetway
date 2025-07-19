@@ -70,10 +70,28 @@ class ShippingController extends Controller
     public function shippingInfo(){
 
         $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();
-
-        $shippingCost = Cart::with('product')->where('user_id', auth()->id())->value('shippingCost');
         
-        $total = $cartItems->sum(fn($item) => $item->product_price * $item->product_quantity);
+        
+        // --- ধাপ ১: প্রথমে কার্টের সকল পণ্যের সাব-টোটাল বের করুন ---
+        // এই কোডটি ডিসকাউন্ট প্রাইস চেক করে সঠিক সাব-টোটাল গণনা করবে।
+        $total = $cartItems->sum(function ($item) {
+            $priceToUse = $item->discount_price > 0 ? $item->discount_price : $item->product_price;
+            return $priceToUse * $item->product_quantity;
+        });
+
+        
+        // --- ধাপ ২: শিপিং খরচের নিয়মটি এখানে প্রয়োগ করুন ---
+        $shippingCost = 0; // ডিফল্টভাবে শিপিং খরচ ০ ধরে নিলাম
+
+        // একটি স্ট্যান্ডার্ড শিপিং খরচ নির্ধারণ করুন (যদি ফ্রি না হয়)। আপনি এই মান পরিবর্তন করতে পারেন।
+        $standardShippingCost = 120; 
+
+        // এখন চেক করুন মোট মূল্য (সাব-টোটাল) ৫০০০ টাকার বেশি কিনা
+        if ($total > 5000) {
+            $shippingCost = 0; // সাব-টোটাল ৫০০০ টাকার বেশি হলে শিপিং খরচ ০
+        } else {
+            $shippingCost = $standardShippingCost; // অন্যথায় স্ট্যান্ডার্ড শিপিং খরচ প্রযোজ্য হবে
+        }
 
         $grand_total = $total + $shippingCost;
         

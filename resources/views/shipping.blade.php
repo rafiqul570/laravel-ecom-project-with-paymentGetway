@@ -14,6 +14,8 @@
 <div class="page-content">
 <div class="checkout">
 <div class="container">
+    <form action="{{ route('checkout.initiate') }}" method="POST">
+    @csrf
 	<div class="row">
 		<div class="col-md-8">
 			<div class="card shadow-sm mb-1 bg-light p-4">
@@ -81,7 +83,11 @@
 							</h3><!-- End .product-title -->
 						   </div><!-- End .product -->
 							</td>
+							@if($item->product_price > 0)
 							<td class="price-col">&#2547 {{$item ->product_price}}</td>
+							@else
+							<td class="price-col">&#2547 {{$item ->discount_price}}</td>
+							@endif
 							<td class="price-col">{{$item ->product_quantity}}</td>
 						</tr>
 					</tbody>
@@ -112,16 +118,17 @@
 					</tbody>
 				</table><!-- End .table table-summary -->
 				
-				 <a href="{{route('payment')}}">
-				 <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">Proceed to pay</button>
-				 </a>
+				 <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block"> Proceed to Payment Options</button>
+		
 			</div>
 		</div>
 	</div>
-
+   </form>
 </div><!-- End .container -->
 </div><!-- End .checkout -->
 </div><!-- End .page-content -->
 </main><!-- End .main -->
 
 @include('front.inc.mollaFooter')
+
+

@@ -39,8 +39,11 @@ class BillingController extends Controller
 
         // এখন চেক করুন মোট মূল্য (সাব-টোটাল) ৫০০০ টাকার বেশি কিনা
         if ($total > 5000) {
+            
             $shippingCost = 0; // সাব-টোটাল ৫০০০ টাকার বেশি হলে শিপিং খরচ ০
+       
         } else {
+            
             $shippingCost = $standardShippingCost; // অন্যথায় স্ট্যান্ডার্ড শিপিং খরচ প্রযোজ্য হবে
         }
         

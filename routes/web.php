@@ -14,12 +14,13 @@ use App\Http\Controllers\Order\CartController;
 use App\Http\Controllers\Order\BillingController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\PaymentController;
+use App\Http\Controllers\PaymentGetway\BkashTokenizePaymentController;
+use App\Http\Controllers\PaymentGetway\StripePaymentController;
+use App\Http\Controllers\PaymentGetway\InvoiceController;
 use App\Http\Controllers\ClaintController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\BkashTokenizePaymentController;
-use App\Http\Controllers\StripePaymentController;
-use App\Http\Controllers\InvoiceController;
+
 
 use App\Models\User;
 
@@ -97,17 +98,6 @@ Route::controller(BillingController::class)->group(function(){
 
 
 
-//PaymentController
-Route::middleware('auth')->group(function () {
-Route::controller(PaymentController::class)->group(function(){
-    Route::get('/payment', 'paymentMethod')->name('payment');
-   
-    
-   });
-
-});
-
-
 //OrderController
 Route::middleware('auth')->group(function () {
 Route::controller(OrderController::class)->group(function(){
@@ -134,26 +124,6 @@ Route::controller(OrderController::class)->group(function(){
 });
 
 
-
-//Bkashcontroller-2
-
-Route::middleware('auth')->group(function () {
-    Route::controller(BkashTokenizePaymentController::class)->group(function(){
-    // Payment Routes for bKash
-    Route::get('/bkash/payment', 'index')->name('bkashT::bkash-payment');
-    Route::get('/bkash/create-payment', 'createPayment')->name('bkash-create-payment');
-    Route::get('/bkash/callback', 'callBack')->name('bkash.callBack');
-
-    //search payment
-    Route::get('/bkash/search/{trxID}', 'searchTnx')->name('bkash-serach');
-
-    //refund payment routes
-    Route::get('/bkash/refund', 'refund')->name('bkash-refund');
-    Route::get('/bkash/refund/status','refundStatus')->name('bkash-refund-status');
-
-});
-
-});
 
 
 //UserProfile
@@ -290,12 +260,16 @@ Route::middleware('auth')->group(function () {
 
 
 
+//Payment Options
 Route::middleware(['auth'])->group(function () {
 //OrderController
-    Route::post('/checkout/initiate', [OrderController::class, 'store'])->name('checkout.initiate'); // মেথডের নাম store ব্যবহার করলে
-    Route::get('/payment-options/{order_id}', [OrderController::class, 'showPaymentOptions'])->name('payment.options');
+     Route::get('/payment-options/{order_id}', [OrderController::class, 'showPaymentOptions'])->name('payment.options');//payment method page load
+    
+    Route::post('/checkout/initiate', [OrderController::class, 'checkout'])->name('checkout.initiate'); 
+    
     Route::post('/process-payment-selection/{order_id}', [OrderController::class, 'processSelection'])->name('payment.process.selection');
     
+
 //InvoiceController
     Route::get('/invoce/success/{order_id}', [InvoiceController::class, 'orderSuccess'])->name('order.success');
 
@@ -303,19 +277,32 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/invoice/download/{order_id}', [InvoiceController::class, 'downloadPDF'])->name('order.download');
 
+    
     // =====================================================================
     //  পেমেন্ট গেটওয়ে রাউট (Payment Gateway Routes)
     // =====================================================================
     
     // --- BKASH PAYMENT FLOW ---
-    Route::get('/bkash/payment/{order_id}', [BkashTokenizePaymentController::class, 'index'])->name('bkash.payment');
+
+    Route::get('/paymentGetway/bkash/payment/{order_id}', [BkashTokenizePaymentController::class, 'index'])->name('paymentGetway.bkash.payment');
+    
     Route::post('/bkash/create-payment', [BkashTokenizePaymentController::class, 'createPayment'])->name('bkash.create-payment');
+    
     Route::get('/bkash/callback', [BkashTokenizePaymentController::class, 'callBack'])->name('bkash.callback');
+
     // অন্যান্য বিকাশ রাউট...
 
+
+
+
+
     // --- STRIPE (CARD) PAYMENT FLOW ---
+    
     Route::get('/stripe-payment/{order_id}', [StripePaymentController::class, 'showPaymentForm'])->name('stripe.payment.form');
+    
     Route::post('/stripe-payment', [StripePaymentController::class, 'processPayment'])->name('stripe.payment.process');
+
+
 
 
 

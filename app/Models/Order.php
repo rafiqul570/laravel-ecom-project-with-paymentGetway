@@ -13,7 +13,7 @@ class Order extends Model
 
      protected $fillable = [
         'invoice_no', 'user_id', 'amount',
-        'payment_method', 'payment_id', 'trx_id', 'delivery_status',
+        'payment_method', 'payment_id', 'trx_id', 'status',
     ];
 
     // ✅ Relation to User
